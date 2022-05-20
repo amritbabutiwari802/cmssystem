@@ -14,3 +14,52 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+
+
+/* cms/index */
+.heading{
+  font-size: 31px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.homepage{
+  width:80%;
+
+  background-color: white;
+  height:700px;
+  padding-top: 1px;
+  padding-left: 25px;
+  padding-right:25px
+}
+
+.homepage_heading{
+  font-size: 25px;
+ 
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+ margin-bottom: 40px;
+}
+
+.cms-home-dash-table tr {
+
+  height:55px
+}
+
+.cms-home-dash-table td {
+max-width: 100px;
+  
+}
+
+
+/*cms editslider*/
+.sliderform tr {
+  max-width: 100px;
+}
+.sliderform td {
+  max-width: 100px;
+}
