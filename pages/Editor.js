@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import Sidebar from "../components/cms/Sidebar";
 import styles from "../styles/editslider.module.css";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
+import get from "../http/get";
+
 const editslider = (props) => {
+  const [items, setitems] = useState([]);
+
+  React.useEffect(() => {
+    async function set_data() {
+      const data = await fetchdata(props.pagedata.index);
+
+      setitems(data);
+    }
+    set_data();
+  }, []);
+
   const router = useRouter();
   return (
     <Sidebar>
@@ -50,7 +63,7 @@ const editslider = (props) => {
             </tr>{" "}
           </thead>
           <tbody>
-            {data.map((value, index) => {
+            {items.map((value, index) => {
               return (
                 <tr style={{ height: "100px" }}>
                   <td style={{ height: "100px" }}>
@@ -68,8 +81,7 @@ const editslider = (props) => {
                       className="mb-3"
                       controlId="exampleForm.ControlTextarea1"
                     >
-                      <Form.Label>Example textarea</Form.Label>
-                      <Form.Control as="textarea" rows={3} />
+                      <Form.Label>Short Description</Form.Label>
                     </Form.Group>
                   </td>
                   <td>
@@ -77,8 +89,7 @@ const editslider = (props) => {
                       className="mb-3"
                       controlId="exampleForm.ControlTextarea1"
                     >
-                      <Form.Label>Example textarea</Form.Label>
-                      <Form.Control as="textarea" rows={3} />
+                      <Form.Label>Main Description</Form.Label>
                     </Form.Group>
                   </td>
                   <td>
@@ -130,6 +141,28 @@ const data = [
     desc: "Gulf Empire Company clients can depend on our Recruitment Services to help them improve their performance",
   },
 ];
+
+const fetchdata = async (index) => {
+  const data = await get("/api/gethome");
+  switch (index) {
+    case 1:
+      return data.slider;
+    case 3:
+      return data.services;
+    case 4:
+      return data.available_jobs;
+    case 5:
+      return data.countries_we_serve;
+    case 6:
+      return data.job_categories;
+    case 7:
+      return data.our_team;
+    case 8:
+      return data.clients;
+    default:
+      break;
+  }
+};
 
 const mapStateToProps = (state) => {
   return { pagedata: state.panel };

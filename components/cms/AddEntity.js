@@ -1,12 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import dynamic from "next/dynamic";
 import "suneditor/dist/css/suneditor.min.css";
 import { connect } from "react-redux";
+import post from "../../http/post";
+import get from "../../http/get";
 
 const AddEntity = (props) => {
-  console.log(props.data);
+  const [isfirst, setfirst] = useState(true);
+
   const [mainimage, setmainimage] = React.useState(null);
   const [logo, setlogo] = React.useState(null);
   const [name, setname] = React.useState("");
@@ -15,11 +18,36 @@ const AddEntity = (props) => {
   const [maineditor, setmaineditor] = React.useState("");
   const [shorteditor, setshorteditor] = React.useState("");
   const [document, setdocument] = React.useState(null);
+  const [maindata, setmaindata] = React.useState(null);
+  const [url, seturl] = useState({
+    img1: "http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg",
+    img2: "http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg",
+  });
+
+  useEffect(() => {
+    const operation = async () => {
+      const givendata = props.redux.addentity.metadata;
+      console.log(givendata);
+      if (givendata.type == "section" && givendata.action == "update") {
+        fetchdata(givendata.index).then((result) => {
+          setmaindata(result);
+        });
+        // console.log(typeof data);
+        // //  console.log(givendata);
+        // //  const data = await fetchdata(parseInt(givendata.index));
+        // //   seturl((prev) => ({ ...prev, img1: data[givendata.innerindex].img }));
+        // setmaineditor((prev) => data[givendata.innerindex].detaildescription);
+        // setshorteditor((prev) => "one1");
+      }
+    };
+
+    operation();
+  }, []);
 
   function handleSubmit() {
     const data = {};
     const metadata = {};
-    const givendata = props.data.addentity.metadata;
+    const givendata = props.redux.addentity.metadata;
     const formdata = new FormData();
     if (mainimage != null) {
       formdata.append("file", mainimage);
@@ -37,24 +65,23 @@ const AddEntity = (props) => {
     }
 
     data.name = name;
-    data.number = number;
+    data.innerindex = number;
     data.caption = caption;
     data.shortdescription = shorteditor;
-    data.detaildescription = detaildescription;
-
-    switch (givendata.type) {
-    }
+    data.detaildescription = maineditor;
+    formdata.append("data", JSON.stringify(data));
+    formdata.append("metadata", JSON.stringify(givendata));
+    post("http://localhost:3000/api/putandpostdata", formdata).then(
+      (result) => {
+        console.log(result);
+      }
+    );
   }
 
   function onFormSubmit(e) {
     e.preventDefault(); // Stop form submit
   }
 
-  function fileUpload(file) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("text", inpuref.current.value);
-  }
   return (
     <Sidebar>
       <div>
@@ -89,14 +116,30 @@ const AddEntity = (props) => {
                 }}
               >
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control
+                  onChange={(e) => {
+                    setname(e.target.value);
+                  }}
+                  value={name}
+                  type="text"
+                />
               </Form.Group>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Position</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control
+                  onChange={(e) => {
+                    setnumber(e.target.value);
+                  }}
+                  value={
+                    maindata == null
+                      ? number
+                      : props.redux.addentity.metadata.innerindex
+                  }
+                  type="text"
+                />
               </Form.Group>
             </div>
             <Form.Group
@@ -108,12 +151,30 @@ const AddEntity = (props) => {
             >
               {" "}
               <Form.Label>Caption</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                onChange={(e) => {
+                  setcaption(e.target.value);
+                }}
+                value={caption}
+                type="text"
+              />
             </Form.Group>
             <div style={{ marginTop: "25px", width: "700px" }}>
               {" "}
               <label>Enter short description</label>
-              <SunEditor height="160px" />
+              <SunEditor
+                height="160px"
+                onChange={(value) => {
+                  setshorteditor(value);
+                }}
+                value={shorteditor}
+                defaultValue={
+                  maindata == null
+                    ? ""
+                    : maindata[props.redux.addentity.metadata.innerindex]
+                        .shortdescription
+                }
+              />
             </div>
             <div style={{ marginTop: "25px", width: "700px" }}>
               {" "}
@@ -121,8 +182,15 @@ const AddEntity = (props) => {
               <SunEditor
                 height="160px"
                 onChange={(value) => {
-                  settest(value);
+                  setmaineditor(value);
                 }}
+                value={maineditor}
+                defaultValue={
+                  maindata == null
+                    ? ""
+                    : maindata[props.redux.addentity.metadata.innerindex]
+                        .detaildescription
+                }
               />
               <div dangerouslySetInnerHTML={{ __html: maineditor }} />
             </div>
@@ -142,21 +210,20 @@ const AddEntity = (props) => {
           >
             <Button
               style={{ width: "200px", marginBottom: "25px" }}
-              onClick={() => {
-                alert(inpuref.current.value);
-              }}
+              onClick={handleSubmit}
             >
               Update
             </Button>
             <img
-              src="http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg"
+              src={
+                maindata == null
+                  ? "http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg"
+                  : maindata[props.redux.addentity.metadata.innerindex].img
+              }
               style={{ width: "200px", height: "200px" }}
             />
 
-            <Form
-              onSubmit={onFormSubmit}
-              style={{ width: "200px", marginTop: "40px" }}
-            >
+            <Form style={{ width: "200px", marginTop: "40px" }}>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label style={{ fontSize: "13px" }}>
                   Upload Feature Image File
@@ -164,7 +231,9 @@ const AddEntity = (props) => {
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    setmainimage(e.target.files[0]);
+                  }}
                 />
               </Form.Group>
             </Form>
@@ -179,7 +248,9 @@ const AddEntity = (props) => {
                 <Form.Control
                   type="file"
                   accept="file/*"
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    setdocument(e.target.files[0]);
+                  }}
                 />
               </Form.Group>
             </Form>
@@ -194,7 +265,9 @@ const AddEntity = (props) => {
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    setlogo(e.target.files[0]);
+                  }}
                 />
               </Form.Group>
             </Form>
@@ -213,13 +286,35 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
 });
 
-const mapStateToProps = (state) => ({ data: state });
+const mapStateToProps = (state) => ({ redux: state });
 
 const mapDispatchToProps = (dispatch) => ({});
 
-const ADDENTITY = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(React.memo(AddEntity));
+const ADDENTITY = connect(mapStateToProps, mapDispatchToProps)(AddEntity);
 
 export default ADDENTITY;
+
+const fetchdata = async (index) => {
+  const data = await get("/api/gethome");
+  console.log(typeof data);
+
+  switch (index) {
+    case 1:
+      return data.slider;
+    case 3:
+      return data.services;
+    case 4:
+      return data.available_jobs;
+    case 5:
+      return data.countries_we_serve;
+    case 6:
+      return data.job_categories;
+    case 7:
+      return data.our_team;
+    case 8:
+      return data.clients;
+    default:
+      return data;
+      break;
+  }
+};

@@ -1,90 +1,175 @@
-import React from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, ButtonToolbar, Form, Table } from "react-bootstrap";
 import Sidebar from "../components/cms/Sidebar";
 import styles from "../styles/editslider.module.css";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { ErrorBoundary } from "react-error-boundary";
+import get from "../http/get";
+import MenuContent from "../components/cms/MenuContent";
+import MenuEditor from "../components/cms/HomePanel/MenuEditor";
+import post from "../http/post";
+import DropdownListing from "../components/cms/DropdownListing";
 
 const menubar = (props) => {
+  const [_metadata, setmetadata] = useState({});
   const router = useRouter();
+  const [mode, setmode] = useState("menu");
+  const [data, setdata] = useState([]);
+  const [name_given, setname] = useState("");
+  const [position_given, setposition] = useState("");
+
+  useEffect(() => {
+    get("/api/getmenu").then((result) => {
+      setdata((prev) => JSON.parse(JSON.stringify(result.menu)));
+    });
+  }, []);
+
+  function addpage() {
+    var metadata = {};
+    metadata.action = "create";
+    metadata.type = "link";
+    setmetadata(metadata);
+    setmode("link");
+  }
+
+  function linkedit(index) {
+    var metadata = {};
+    metadata.action = "update";
+    metadata.type = "link";
+    metadata.number = index;
+    setmode("editlik");
+  }
+
+  function createdropdown() {
+    var metadata = {};
+    setmode("createdropdown");
+  }
+
+  function listdropdown(index) {
+    var metadata = {};
+
+    metadata.index = index;
+    setmetadata(metadata);
+    setmode("listdropdown");
+  }
+  function addpagetodropdown() {
+    var metadata = {};
+    metadata.action = "addpagetodropdown";
+    metadata.type = "dropdown";
+
+    metadata.index = _metadata.index;
+    setmetadata(metadata);
+    setmode("addpagetodropdown");
+  }
+
+  function editpagestodropdown(index) {
+    var metadata = {};
+    metadata.action = "update";
+    metadata.type = "dropdown";
+    metadata.number = index;
+    metadata.index = index;
+    setmode("editpagestodropdown");
+  }
+
+  function deleteitem(index) {
+    var metadata = {};
+  }
+
   return (
     <Sidebar>
       <ErrorBoundary FallbackComponent={ErrorHandler}>
-        <div className="heading">DashBoard Control Panel</div>
-        <div className="homepage">
-          <div className="homepage_heading">
-            <div> MEDIA LIST</div>
-            <div>
-              <Button
-                onClick={() => {
-                  props.push_data_for_add_entity({
-                    type: "menubar",
-                    innertype: "link",
+        <div className="">
+          {mode == "menu" && (
+            <MenuContent
+              addpage={addpage}
+              adddrop={createdropdown}
+              data={data}
+              update={linkedit}
+              listdropdown={listdropdown}
+              delete={deleteitem}
+            />
+          )}
 
-                    action: "create",
-                  });
-                  router.push("/Editor_S");
+          {mode == "link" && <MenuEditor menu={data} metadata={_metadata} />}
+          {mode == "createdropdown" && (
+            <>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                style={{
+                  width: "400px",
                 }}
               >
-                Add Page
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  onChange={(e) => {
+                    setname(e.target.value);
+                  }}
+                  value={name_given}
+                  type="text"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                style={{
+                  width: "400px",
+                }}
+              >
+                <Form.Label>Position</Form.Label>
+                <Form.Control
+                  onChange={(e) => {
+                    setposition(e.target.value);
+                  }}
+                  value={position_given}
+                  defaultValue="0"
+                  type="text"
+                />
+              </Form.Group>
+              <Button
+                variant="success"
+                onClick={() => {
+                  const formdata = new FormData();
+                  const temp = data;
+                  temp.splice(parseInt(position_given), 0, {
+                    name: name_given,
+                    type: "dropdown",
+                    items: [],
+                  });
+                  formdata.append("data", JSON.stringify(temp));
+                  formdata.append(
+                    "metadata",
+                    JSON.stringify({
+                      type: "dropdown",
+                      action: "createdropdown",
+                    })
+                  );
+                  post("/api/setmenu", formdata).then(() => {
+                    router.reload();
+                  });
+                }}
+              >
+                submit
               </Button>
-              <Button style={{ marginLeft: "16px", backgroundColor: "green" }}>
-                Add Dropdown
-              </Button>
-            </div>
-          </div>
+            </>
+          )}
 
-          <Table bordered hover className="sliderform">
-            <thead>
-              <tr>
-                <th>SN</th>
-                <th>Main Text</th>
-                <th>Descriptin</th>
-                <th>Acton</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((value, index) => {
-                return (
-                  <tr style={{ height: "100px" }} key={index}>
-                    <td style={{ height: "100px" }}>
-                      <div>{index}</div>
-                    </td>
-                    <td>{value.link}</td>
-                    <td> {value.type}</td>
-                    <td>
-                      <Button
-                        variant="info"
-                        onClick={() => {
-                          if (value.type == "link") {
-                            props.push_data_for_add_entity({
-                              metadata: {
-                                type: "menubar",
-                                innertype: "link",
-                                index,
+          {mode == "listdropdown" && (
+            <DropdownListing
+              click={() => {}}
+              ondelete={() => {}}
+              addpage={() => {
+                addpagetodropdown();
+              }}
+              data={data}
+              metadata={_metadata}
+            />
+          )}
 
-                                action: "update",
-                              },
-                            });
-                            router.push("/Editor_S");
-                          } else {
-                            props.saveData({ index });
-                            router.push("/editdropdown");
-                          }
-                        }}
-                      >
-                        Edit
-                      </Button>
-                      <Button style={{ marginLeft: "16px" }} variant="danger">
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+          {mode == "addpagetodropdown" && (
+            <MenuEditor menu={data} metadata={_metadata} />
+          )}
         </div>
       </ErrorBoundary>
     </Sidebar>

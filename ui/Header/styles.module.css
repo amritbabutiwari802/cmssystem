@@ -1,0 +1,1116 @@
+@media (min-width:1500px) {
+    .container{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10%;
+        padding-right: 10%;
+        height:70px;
+        align-items: center;
+        color:white;
+        background-color: #0070d2;
+    }
+ 
+.logocontainer{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top:16px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .logo{
+        width:200px;
+        max-height:70px
+    }
+    
+    .socialcontainer{
+        display: flex;
+        gap:10px;
+
+    }
+
+    .socialmedia{
+        max-width:25px;
+        max-height:25px
+        
+    }
+
+
+
+    /* //appbar */
+
+    .appbar{
+        height:55px;
+        padding-left: 10px;
+        padding-right: 25px;
+         margin-left: 10%;
+         margin-right: 10%;
+         background-color: #0070d2;
+         display:flex;
+         color:white;
+         justify-content: space-between;
+    }
+    .appbarcontainer{
+        height:55px;
+       padding-left: 10px;
+      
+       
+        display:flex;
+        color:white;
+        gap:10px;
+    }
+
+    .menuitem{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 16px;
+       text-transform:uppercase;
+       background-color: #0070d2 !important;
+       height:100%;
+       border-style: none !important;
+    }
+    .menuitem:hover{
+        background-color: #4b4b7d;
+        cursor: pointer !important;
+    }
+
+    .apply{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 16px;
+       text-transform:uppercase;
+       justify-self: flex-end;
+    }
+    .apply:hover{
+        background-color: #4b4b7d;
+        cursor: pointer;
+    }
+
+    /* slider container */
+
+.slidercontainer{
+    padding-left: 10%;
+    padding-right:10%
+}
+
+.sliderimage{
+    width:100%;
+    height:400px
+}
+
+/*introduction*/
+
+.introduction{
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    gap:100px;
+    padding-top: 55px;
+}
+
+.intro_image{
+    width:400px;
+    height:245px
+}
+
+.introduction_text_container_box{
+    flex:1
+}
+
+.introduction_heading{
+    font-size: 31px;
+    font-weight: 700;
+    color:#636363;
+}
+
+.introduction_shortdescription{
+    color:#8c8c8c;
+    
+}
+
+/*services*/
+
+.servicesmapper{
+    display: flex;
+    gap:25px;
+    justify-content: center;
+}
+
+.servicescontainer{
+    display: flex;
+    flex-direction:column;
+     justify-content: center;
+     align-items: center;
+   
+     background-image: url('/uploads/mteverest.jfif');
+     margin-top: 55px;
+     background-repeat: no-repeat;
+  background-size: cover;
+  padding-top:40px;
+  padding-bottom: 70px;
+  margin-left: 10%;
+    margin-right: 10%;
+   
+     
+ }
+ 
+
+.servicecontainer{
+   display: flex;
+   flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width:100%;
+    
+
+   
+  
+    
+}
+
+.servicescard{
+    width:310px;
+    background-color: #f8f8f8;
+}
+
+.serviceheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:white;
+    font-weight: 700;
+}
+
+.jobs_card_available{
+    height:160px !important;
+
+
+}
+
+.jobsheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:black;
+    font-weight: 700;
+}
+
+.jobs_categories_box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* footor */
+.footer_container{
+    height:370px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right:10%;
+    background-color: #242424;
+    display: flex;
+    
+}
+
+.footor_name{
+color:white;
+font-size: 25px;
+font-family: serif;
+margin-top: 25px;
+margin-bottom: 16px;
+}
+
+.footor_address{
+    color:#89909c
+    }
+
+    .footor_email{
+        color:white;
+        font-size: 11px;
+        height:40px;
+        background-color: #333333;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        }
+
+        .navigation_container{
+            color:white;
+            margin-left: 100px;
+            padding-top: 25px;
+            font-size: 25px;
+            font-family: serif;
+            max-width: 400px;
+        }
+
+.footer_nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+        
+        .footer_navitem{
+            height:40px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            font-size: 13px;
+            width: 200px;
+            cursor: pointer;
+            
+        }
+        
+        .footer_navitem:hover{
+            background-color: #267adf;
+        }
+
+}
+
+
+
+
+
+
+@media (min-width:1100px) {
+    @media (max-width:1499px) {
+    .container{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 5%;
+        padding-right: 5%;
+        height:70px;
+        align-items: center;
+        color:white;
+        background-color: #0070d2;
+    }
+ 
+.logocontainer{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:16px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .logo{
+        width:200px;
+        max-height:70px
+    }
+    
+    .socialcontainer{
+        display: flex;
+        gap:10px;
+
+    }
+
+    .socialmedia{
+        max-width:25px;
+        max-height:25px
+        
+    }
+
+
+
+    /* //appbar */
+
+    .appbar{
+        height:55px;
+        padding-left: 10px;
+        padding-right: 25px;
+         margin-left: 5%;
+         margin-right: 5%;
+         background-color: #0070d2;
+         display:flex;
+         color:white;
+         justify-content: space-between;
+    }
+    .appbarcontainer{
+        height:55px;
+       padding-left: 10px;
+      
+       
+        display:flex;
+        color:white;
+        gap:10px;
+    }
+
+    .menuitem{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 16px;
+       text-transform:uppercase;
+       background-color: #0070d2 !important;
+       height:100%;
+       border-style: none !important;
+    }
+    .menuitem:hover{
+        background-color: #4b4b7d !important;
+        cursor: pointer;
+        
+    }
+
+    .apply{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 16px;
+       text-transform:uppercase;
+       justify-self: flex-end;
+    }
+    .apply:hover{
+        background-color: #4b4b7d;
+        cursor: pointer;
+    }
+
+    /* slider container */
+
+.slidercontainer{
+    padding-left: 5%;
+    padding-right:5%
+}
+
+.sliderimage{
+    width:100%;
+    height:400px
+}
+
+/*introduction*/
+
+.introduction{
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    gap:100px;
+    padding-top: 55px;
+}
+
+.intro_image{
+    width:400px;
+    height:245px
+}
+
+.introduction_text_container_box{
+    flex:1
+}
+
+.introduction_heading{
+    font-size: 31px;
+    font-weight: 700;
+    color:#636363;
+}
+
+.introduction_shortdescription{
+    color:#8c8c8c;
+    
+}
+
+/*services*/
+
+.servicesmapper{
+    display: flex;
+    gap:25px;
+    justify-content: center;
+}
+
+.servicescontainer{
+    display: flex;
+    flex-direction:column;
+     justify-content: center;
+     align-items: center;
+   
+     background-image: url('/uploads/mteverest.jfif');
+     margin-top: 55px;
+     background-repeat: no-repeat;
+  background-size: cover;
+  padding-top:40px;
+  padding-bottom: 70px;
+  margin-left: 5%;
+    margin-right: 5%;
+   
+     
+ }
+ 
+
+.servicecontainer{
+   display: flex;
+   flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width:100%;
+    
+
+   
+  
+    
+}
+
+.servicescard{
+    width:310px;
+    background-color: #f8f8f8;
+}
+
+.serviceheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:white;
+    font-weight: 700;
+}
+
+.jobs_card_available{
+    height:160px !important;
+
+
+}
+
+.jobsheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:black;
+    font-weight: 700;
+}
+
+.jobs_categories_box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* footor */
+.footer_container{
+    height:370px;
+    width: 100%;
+    padding-left: 5%;
+    padding-right:5%;
+    background-color: #242424;
+    display: flex;
+    
+}
+
+.footor_name{
+color:white;
+font-size: 25px;
+font-family: serif;
+margin-top: 25px;
+margin-bottom: 16px;
+}
+
+.footor_address{
+    color:#89909c
+    }
+
+    .footor_email{
+        color:white;
+        font-size: 11px;
+        height:40px;
+        background-color: #333333;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        }
+
+        .navigation_container{
+            color:white;
+            margin-left: 100px;
+            padding-top: 25px;
+            font-size: 25px;
+            font-family: serif;
+            max-width: 400px;
+        }
+
+.footer_nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+        
+        .footer_navitem{
+            height:40px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            font-size: 13px;
+            width: 200px;
+            cursor: pointer;
+            
+        }
+        
+        .footer_navitem:hover{
+            background-color: #267adf;
+        }
+
+}
+
+}
+
+@media (min-width:992px) {
+    @media (max-width:1099px) {
+    .container{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 5%;
+        padding-right: 5%;
+        height:70px;
+        align-items: center;
+        color:white;
+        background-color: #0070d2;
+    }
+ 
+.logocontainer{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:16px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .logo{
+        width:200px;
+        max-height:70px
+    }
+    
+    .socialcontainer{
+        display: flex;
+        gap:10px;
+
+    }
+
+    .socialmedia{
+        max-width:25px;
+        max-height:25px
+        
+    }
+
+
+
+    /* //appbar */
+
+    .appbar{
+        height:55px;
+        padding-left: 10px;
+        padding-right: 25px;
+         margin-left: 5%;
+         margin-right: 5%;
+         background-color: #0070d2;
+         display:flex;
+         color:white;
+         justify-content: space-between;
+    }
+    .appbarcontainer{
+        height:55px;
+       padding-left: 10px;
+      
+       
+        display:flex;
+        color:white;
+        gap:4px;
+    }
+
+    .menuitem{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 13px;
+       text-transform:uppercase;
+       border-style: none !important;
+       background-color: #0070d2;
+    }
+    .menuitem:hover{
+        background-color: #4b4b7d !important;
+        cursor: pointer;
+    }
+
+    .apply{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 16px;
+       font-weight: 500;
+       font-size: 16px;
+       text-transform:uppercase;
+       justify-self: flex-end;
+    }
+    .apply:hover{
+        background-color: #4b4b7d;
+        cursor: pointer;
+    }
+
+    /* slider container */
+
+.slidercontainer{
+    padding-left: 5%;
+    padding-right:5%
+}
+
+.sliderimage{
+    width:100%;
+    height:400px
+}
+
+/*introduction*/
+
+.introduction{
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    gap:100px;
+    padding-top: 55px;
+}
+
+.intro_image{
+    width:400px;
+    height:340px
+}
+
+.introduction_text_container_box{
+    flex:1
+}
+
+.introduction_heading{
+    font-size: 31px;
+    font-weight: 700;
+    color:#636363;
+}
+
+.introduction_shortdescription{
+    color:#8c8c8c;
+    
+}
+
+/*services*/
+
+.servicesmapper{
+    display: flex;
+    gap:25px;
+    justify-content: center;
+}
+
+.servicescontainer{
+    display: flex;
+    flex-direction:column;
+     justify-content: center;
+     align-items: center;
+   
+     background-image: url('/uploads/mteverest.jfif');
+     margin-top: 55px;
+     background-repeat: no-repeat;
+  background-size: cover;
+  padding-top:40px;
+  padding-bottom: 70px;
+  margin-left: 5%;
+    margin-right: 5%;
+   
+     
+ }
+ 
+
+.servicecontainer{
+   display: flex;
+   flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width:100%;
+    
+
+   
+  
+    
+}
+
+.servicescard{
+    width:310px;
+    background-color: #f8f8f8;
+}
+
+.serviceheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:white;
+    font-weight: 700;
+}
+
+.jobs_card_available{
+    height:160px !important;
+
+
+}
+
+.jobsheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:black;
+    font-weight: 700;
+}
+
+.jobs_categories_box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* footor */
+.footer_container{
+    height:370px;
+    width: 100%;
+    padding-left: 5%;
+    padding-right:5%;
+    background-color: #242424;
+    display: flex;
+    
+}
+
+.footor_name{
+color:white;
+font-size: 25px;
+font-family: serif;
+margin-top: 25px;
+margin-bottom: 16px;
+}
+
+.footor_address{
+    color:#89909c
+    }
+
+    .footor_email{
+        color:white;
+        font-size: 11px;
+        height:40px;
+        background-color: #333333;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        }
+
+        .navigation_container{
+            color:white;
+            margin-left: 100px;
+            padding-top: 25px;
+            font-size: 25px;
+            font-family: serif;
+            max-width: 400px;
+        }
+
+.footer_nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+        
+        .footer_navitem{
+            height:40px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            font-size: 13px;
+            width: 200px;
+            cursor: pointer;
+            
+        }
+        
+        .footer_navitem:hover{
+            background-color: #267adf;
+        }
+
+}
+
+}
+
+
+
+
+@media (min-width:768px) {
+    @media (max-width:991px) {
+    .container{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 5%;
+        padding-right: 5%;
+        height:70px;
+        align-items: center;
+        color:white;
+        background-color: #0070d2;
+    }
+ 
+.logocontainer{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top:16px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .logo{
+        width:200px;
+        max-height:70px
+    }
+    
+    .socialcontainer{
+        display: flex;
+        gap:10px;
+
+    }
+
+    .socialmedia{
+        max-width:25px;
+        max-height:25px
+        
+    }
+
+
+
+    /* //appbar */
+
+    .appbar{
+        height:40px;
+        padding-left: 10px;
+        padding-right: 25px;
+         margin-left: 5%;
+         margin-right: 5%;
+         background-color: #0070d2;
+         display:flex;
+         color:white;
+         justify-content: space-between;
+    }
+    .appbarcontainer{
+        height:55px;
+       padding-left: 10px;
+      
+       
+        display:flex;
+        color:white;
+        gap:4px;
+    }
+
+    .menuitem{
+        padding-left: 2px;
+        padding-right: 2px;
+       padding-top: 6px;
+       font-weight: 700;
+       font-size: 9px;
+       text-transform:uppercase;
+    }
+    .menuitem:hover{
+        background-color: #4b4b7d;
+        cursor: pointer;
+    }
+
+    .apply{
+        padding-left: 7px;
+        padding-right: 7px;
+       padding-top: 6px;
+       font-weight: 500;
+       font-size: 13px;
+       text-transform:uppercase;
+       justify-self: flex-end;
+    }
+    .apply:hover{
+        background-color: #4b4b7d;
+        cursor: pointer;
+    }
+
+    /* slider container */
+
+.slidercontainer{
+    padding-left: 5%;
+    padding-right:5%
+}
+
+.sliderimage{
+    width:100%;
+    height:200px
+}
+
+/*introduction*/
+
+.introduction{
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    gap:100px;
+    padding-top: 25px;
+}
+
+.intro_image{
+    width:250px;
+    height:220px
+}
+
+.introduction_text_container_box{
+    flex:1
+}
+
+.introduction_heading{
+    font-size: 19px;
+    font-weight: 700;
+    color:#636363;
+}
+
+.introduction_shortdescription{
+    color:#8c8c8c;
+    height:170px;
+    overflow: hidden;
+    text-overflow:unset;
+    
+}
+
+/*services*/
+
+.servicesmapper{
+    display: flex;
+    gap:15px;
+    justify-content: center;
+}
+
+.servicescontainer{
+    display: flex;
+    flex-direction:column;
+     justify-content: center;
+     align-items: center;
+   
+     background-image: url('/uploads/mteverest.jfif');
+     margin-top: 55px;
+     background-repeat: no-repeat;
+  background-size: cover;
+  padding-top:40px;
+  padding-bottom: 70px;
+  margin-left: 5%;
+    margin-right: 5%;
+   
+     
+ }
+ 
+
+.servicecontainer{
+   display: flex;
+   flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width:100%;
+    
+
+   
+  
+    
+}
+
+.servicescard{
+    width:310px;
+    background-color: #f8f8f8;
+}
+
+.serviceheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:white;
+    font-weight: 700;
+}
+
+.jobs_card_available{
+    height:160px !important;
+
+
+}
+
+.jobsheading{
+    font-size: 34px;
+    margin-bottom: 25px;
+    color:black;
+    font-weight: 700;
+}
+
+.jobs_categories_box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* footor */
+.footer_container{
+    height:370px;
+    width: 100%;
+    padding-left: 5%;
+    padding-right:5%;
+    background-color: #242424;
+    display: flex;
+    
+}
+
+.footor_name{
+color:white;
+font-size: 25px;
+font-family: serif;
+margin-top: 25px;
+margin-bottom: 16px;
+}
+
+.footor_address{
+    color:#89909c
+    }
+
+    .footor_email{
+        color:white;
+        font-size: 11px;
+        height:28px;
+        background-color: #333333;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        }
+
+        .navigation_container{
+            color:white;
+            margin-left: 100px;
+            padding-top: 25px;
+            font-size: 25px;
+            font-family: serif;
+            max-width: 400px;
+        }
+
+.footer_nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+        
+        .footer_navitem{
+            height:28px;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            font-size: 13px;
+            width: 200px;
+            cursor: pointer;
+            
+        }
+        
+        .footer_navitem:hover{
+            background-color: #267adf;
+        }
+
+}
+
+}

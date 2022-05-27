@@ -100,31 +100,6 @@ const Homepanel = (props) => {
                 </td>
               </tr>
               <tr>
-                <td>4</td>
-                <td>Available Jobs</td>
-                <td>
-                  <Form>
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="active"
-                      defaultChecked={true}
-                    />
-                  </Form>
-                </td>
-                <td>
-                  <Button
-                    variant="info"
-                    onClick={() => {
-                      props.saveData({ index: 4 });
-                      router.push("/Editor");
-                    }}
-                  >
-                    Edit
-                  </Button>
-                </td>
-              </tr>
-              <tr>
                 <td>5</td> <td>Countries We Serve</td>
                 <td>
                   <Form>
@@ -141,30 +116,6 @@ const Homepanel = (props) => {
                     variant="info"
                     onClick={() => {
                       props.saveData({ index: 5 });
-                      router.push("/Editor");
-                    }}
-                  >
-                    Edit
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td> <td>Jobs Categories</td>
-                <td>
-                  <Form>
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="active"
-                      defaultChecked={true}
-                    />
-                  </Form>
-                </td>
-                <td>
-                  <Button
-                    variant="info"
-                    onClick={() => {
-                      props.saveData({ index: 6 });
                       router.push("/Editor");
                     }}
                   >

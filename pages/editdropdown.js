@@ -22,7 +22,7 @@ const menubar = (props) => {
 
                     index: props.menubar.index,
 
-                    action: "create",
+                    action: "createitem",
                   },
                 });
                 router.push("/Editor_S");
@@ -61,7 +61,7 @@ const menubar = (props) => {
                             index: props.menubar.index,
                             innerindex: index,
 
-                            action: "update",
+                            action: "updateitem",
                           },
                         });
                         router.push("/Editor_S");

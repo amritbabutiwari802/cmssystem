@@ -38,10 +38,23 @@ const AddEntityReducer = (state = initialState, action) => {
   }
 };
 
+const PageReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "page":
+      return {
+        ...action.data,
+      };
+
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   panel: PanelReducer,
   menubar: MenubarReducer,
   addentity: AddEntityReducer,
+  pagereducer: PageReducer,
 });
 
 const store = createStore(rootReducer);
