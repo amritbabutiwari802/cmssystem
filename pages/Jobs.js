@@ -3,18 +3,12 @@ import { connect } from "react-redux";
 import get from "../http/get";
 import Header, {
   AppBar,
-  Countries_we_serve,
   Footer,
-  Introduction,
-  Jobs_available,
-  Jobs_categories,
-  OurClient,
-  OurTeam,
-  Services,
-  Slider,
+  ImageContainer,
+  JobContainer,
 } from "../ui/Header/Header";
 
-export default function Home() {
+const pages = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
   useEffect(() => {
     get("/api/getall").then((result) => {
@@ -23,7 +17,7 @@ export default function Home() {
         pagedata: result.home,
         menu: result.menu,
         global: result.global,
-        media: global.media,
+        media: result.media,
         pageloaded: true,
       }));
     });
@@ -39,20 +33,16 @@ export default function Home() {
             registration={data.global.registration}
           />
 
-          <AppBar menu={data.menu} />
-          <Slider slider={data.pagedata.slider} />
-          <Introduction introduction={data.pagedata.introduction} />
-          <Services services={data.pagedata.services} />
-          <Jobs_categories jobs_categories={data.pagedata.job_categories} />
-          <Countries_we_serve
-            countries_we_serve={data.pagedata.countries_we_serve}
-          />
-          <Jobs_available job_categories={data.pagedata.job_categories} />
-          <OurTeam our_team={data.pagedata.our_team} />
-          <OurClient clients={data.pagedata.clients} />
+          <AppBar menu={data.menu} reload={true} />
+
+          <div>
+            <JobContainer jobs={data.pagedata.job_categories} />
+          </div>
           <Footer data={{ global: data.global, menu: data.menu }} />
         </>
       )}
     </div>
   );
-}
+};
+
+export default pages;

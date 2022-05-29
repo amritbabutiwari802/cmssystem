@@ -5,7 +5,7 @@ const config = {
   collection: "menu",
 };
 
-const savemenu = (data, metadata, req, res) => {
+const savemenu = (req, res) => {
   getSession()
     .then((result) => {
       if (!result.success) {
@@ -15,9 +15,7 @@ const savemenu = (data, metadata, req, res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -32,58 +30,57 @@ const savemenu = (data, metadata, req, res) => {
           });
         })
         .then((collection) => {
-          console.log("metadata-received");
-          if (metadata.type == "link") {
-            if (data[parseInt(metadata.number)].hasimage) {
-              data[parseInt(metadata.number)].img =
-                "/uploads/" + req.files[0].originalname;
-              if (data[parseInt(metadata.number)].hasdocument) {
-                data[parseInt(metadata.number)].file =
-                  "/uploads/" + req.files[1].originalname;
-              }
-            } else {
-              if (data[parseInt(metadata.number)].hasdocument) {
-                data[parseInt(metadata.number)].file =
-                  "/uploads/" + req.files[0].originalname;
-              }
+          const menu = JSON.parse(JSON.parse(JSON.stringify(req.body)).menu);
+          const data = JSON.parse(JSON.parse(JSON.stringify(req.body)).data);
+          console.log(menu);
+          const temp = {};
+          if (data.hasimage) {
+            temp.img = "/uploads/" + req.files[0].originalname;
+            if (data.hasdocument) {
+              temp.document = "/uploads/" + req.files[1].orignalname;
             }
-          } else {
-            if (metadata.action == "createdropdown") {
-            } else {
-              if (
-                data[parseInt(metadata.index)].items[parseInt(metadata.number)]
-                  .hasimage
-              ) {
-                data[parseInt(metadata.index)].items[
-                  parseInt(metadata.number)
-                ].img = "/uploads/" + req.files[0].originalname;
-                if (
-                  data[parseInt(metadata.index)].items[
-                    parseInt(metadata.number)
-                  ].hasdocument
-                ) {
-                  data[parseInt(metadata.index)].items[
-                    parseInt(metadata.number)
-                  ].file = "/uploads/" + req.files[1].originalname;
-                }
-              } else {
-                if (
-                  data[parseInt(metadata.index)].items[
-                    parseInt(metadata.number)
-                  ].hasdocument
-                ) {
-                  data[parseInt(metadata.number)].items[
-                    parseInt(metadata.number)
-                  ].file = "/uploads/" + req.files[0].originalname;
-                }
-              }
-            }
+          } else if (data.hasdocument) {
+            temp.document = "/uploads/" + req.files[0].originalname;
           }
 
-          return collection.modify('key="menu"').set("menu", data).execute();
+          switch (data.action) {
+            case "createmenu":
+              temp.type = "menu";
+              temp.name = data.name;
+              temp.text = data.text;
+              menu.splice(parseInt(data.number), 0, temp);
+              break;
+            case "editmenu":
+              temp.type = "menu";
+              temp.name = data.name;
+              temp.text = data.text;
+              menu[parseInt(data.number)] = temp;
+              break;
+            case "editpagetodropdown":
+              temp.name = data.name;
+              temp.text = data.text;
+              menu[parseInt(data.index)].items[parseInt(data.number)] = temp;
+              break;
+            case "addpagetodropdown":
+              temp.name = data.name;
+              temp.text = data.text;
+              menu[parseInt(data.index)].items.splice(
+                parseInt(data.number),
+                0,
+                temp
+              );
+              break;
+            default:
+              break;
+          }
+          console.log(menu);
+
+          return collection.modify('key="menu"').set("menu", menu).execute();
         })
         .then(() => {
-          res.status(200).json({ success: true }).end();
+          session.close();
+          res.status(200).json({ success: true });
+          res.end();
         });
     });
 };

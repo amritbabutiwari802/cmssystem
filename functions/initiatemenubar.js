@@ -15,9 +15,7 @@ const menuinitiate = (res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {

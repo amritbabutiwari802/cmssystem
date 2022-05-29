@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import get from "../http/get";
-import Header, { AppBar, Footer } from "../ui/Header/Header";
+import Header, { AppBar, Footer, ImageContainer } from "../ui/Header/Header";
 
 const pages = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
@@ -12,6 +12,7 @@ const pages = (props) => {
         pagedata: result,
         menu: result.menu,
         global: result.global,
+        media: result.media,
         pageloaded: true,
       }));
     });
@@ -30,32 +31,7 @@ const pages = (props) => {
           <AppBar menu={data.menu} reload={true} />
 
           <div>
-            {typeof props.data.img == "string" && (
-              <>
-                <img
-                  src={props.data.img}
-                  style={{
-                    width: "70%",
-                    marginLeft: "15%",
-                    marginRight: "15%",
-                    marginTop: "40px",
-                    marginBottom: "40px",
-                  }}
-                />
-              </>
-            )}
-            <div
-              style={{
-                width: "70%",
-                marginLeft: "15%",
-                marginRight: "15%",
-
-                marginBottom: "40px",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: props.data.text,
-              }}
-            />
+            <ImageContainer images={data.media.image} />
           </div>
           <Footer data={{ global: data.global, menu: data.menu }} />
         </>

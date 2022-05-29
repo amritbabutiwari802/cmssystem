@@ -62,7 +62,7 @@ const Appbar = (props) => {
           Home
         </div>
         {props.menu.map((value, index) => {
-          if (value.type == "link") {
+          if (value.type == "menu" && !["Gallery"].includes(value.name)) {
             return (
               <div
                 className={styles.menuitem}
@@ -75,13 +75,58 @@ const Appbar = (props) => {
                 {value.name}
               </div>
             );
+          } else if (
+            value.type == "menu" &&
+            ["Services", "Jobs"].includes(value.name)
+          ) {
+            return (
+              <div
+                className={styles.menuitem}
+                onClick={async () => {
+                  await props.saveData(value);
+
+                  router.push("/" + value.name);
+                }}
+              >
+                {value.name}
+              </div>
+            );
+          } else if (value.type == "menu" && ["Gallery"].includes(value.name)) {
+            return (
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="success"
+                  id="dropdown-basic"
+                  className={styles.dropdownitem}
+                >
+                  {value.name}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={async () => {
+                      router.push("/imagegallery");
+                    }}
+                  >
+                    IMAGES
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={async () => {
+                      router.push("/videogallery");
+                    }}
+                  >
+                    VIDEOS
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            );
           } else {
             return (
               <Dropdown>
                 <Dropdown.Toggle
                   variant="success"
                   id="dropdown-basic"
-                  className={styles.menuitem}
+                  className={styles.dropdownitem}
                 >
                   {value.name}
                 </Dropdown.Toggle>
@@ -133,6 +178,9 @@ export {
   OurTeam,
   OurClient,
   Footer,
+  ImageContainer,
+  JobContainer,
+  ServicePage,
 };
 
 const Slider = (props) => {
@@ -518,7 +566,7 @@ const Footer = (props) => {
         className={styles.logocontainer}
         style={{ background: "#267adf", color: "white" }}
       >
-        <div>
+        <div className={styles.footertext}>
           {props.data.global.name} | All Rights Reserved © 2019, By: Radiant
           Infotech
         </div>
@@ -539,6 +587,96 @@ const Footer = (props) => {
           <img className={styles.socialmedia} src="/twitter.png" />
         </div>
       </div>
+    </div>
+  );
+};
+
+const ImageContainer = (props) => {
+  return (
+    <div className={styles.imagecontainer_gellery}>
+      {props.images.map((value) => (
+        <img className={styles.imageitem_gallery} src={value} key={value} />
+      ))}
+    </div>
+  );
+};
+
+const JobContainer = (props) => {
+  const [jobs, setjobs] = useState({ counrties: [] });
+
+  return (
+    <div className={styles.jobcontainer}>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Select a Job Category
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {props.jobs.map((value, index) => (
+            <>
+              <Dropdown.Item
+                onClick={() => {
+                  setjobs((prev) => value);
+                }}
+                eventKey={index}
+              >
+                {value.category}
+              </Dropdown.Item>
+            </>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {jobs.counrties.map((value, index) => {
+        return (
+          <div>
+            <Card className={styles.servicescard}>
+              <Card.Img
+                variant="top"
+                src={jobs.img}
+                className={styles.jobs_card_available}
+              />
+              <Card.Body>
+                <Card.Text>
+                  <div>Job Category : {jobs.category}</div>
+                  <div>Job Name : {value.name}</div>
+                  <div> Country : {value.country}</div>
+                </Card.Text>
+                <Button color="white" variant="info">
+                  See Description
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const ServicePage = (props) => {
+  const [data, setdata] = useState([]);
+
+  useEffect(() => {
+    setdata(props.services);
+  }, []);
+
+  return (
+    <div className={styles.servicespage}>
+      {data.map((value, index) => (
+        <Card className={styles.servicescard_page}>
+          <Card.Img variant="top" src={value.img} />
+          <Card.Body>
+            <Card.Text>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: value.shortdescription,
+                }}
+              />
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 };

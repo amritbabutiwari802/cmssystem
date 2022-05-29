@@ -15,9 +15,7 @@ const imageinitiate = async (res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -36,6 +34,7 @@ const imageinitiate = async (res) => {
             .add({ key: "media", media: { image: [], video: [] } })
             .execute()
             .then((result) => {
+              session.close();
               if (result.error) {
                 res.status(500);
                 res.end();
@@ -44,8 +43,7 @@ const imageinitiate = async (res) => {
                 res.end();
               }
             });
-        })
-        .then(() => {});
+        });
     });
 };
 
@@ -61,9 +59,7 @@ const setmedia = async (req, res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -110,6 +106,7 @@ const setmedia = async (req, res) => {
                 .set("media", media)
                 .execute()
                 .then((response) => {
+                  session.close();
                   if (response.error) {
                     console.log(response.err);
                   } else {
@@ -132,9 +129,8 @@ const getmedia = (req, res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
+
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -158,6 +154,7 @@ const getmedia = (req, res) => {
               return response.fetchOne();
             })
             .then((result) => {
+              session.close();
               if (result.error) {
                 res.status(500);
                 res.end();

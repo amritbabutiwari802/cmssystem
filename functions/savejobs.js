@@ -16,9 +16,7 @@ const savejobs = (req, res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       return schema
         .existsInDatabase()
         .then((exists) => {
@@ -62,6 +60,7 @@ const savejobs = (req, res) => {
               }
             })
             .then(() => {
+              session.close();
               res.status(200).json({ success: true });
               res.end();
             });

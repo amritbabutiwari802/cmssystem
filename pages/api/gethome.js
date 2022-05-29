@@ -3,7 +3,7 @@ import getHome from "../../functions/getHome";
 
 export default async function handler(req, res) {
   const data = await getHome();
-  console.log(data);
+
   res.status(200).json(data);
   res.end();
 }

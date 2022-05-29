@@ -21,6 +21,7 @@ const menubar = (props) => {
 
   useEffect(() => {
     get("/api/getmenu").then((result) => {
+      console.log(_metadata);
       setdata((prev) => JSON.parse(JSON.stringify(result.menu)));
     });
   }, []);
@@ -30,15 +31,16 @@ const menubar = (props) => {
     metadata.action = "create";
     metadata.type = "link";
     setmetadata(metadata);
-    setmode("link");
+    setmode("createmenu");
   }
 
-  function linkedit(index) {
+  function editmenu(index) {
     var metadata = {};
     metadata.action = "update";
     metadata.type = "link";
     metadata.number = index;
-    setmode("editlik");
+    setmetadata(metadata);
+    setmode("editmenu");
   }
 
   function createdropdown() {
@@ -68,12 +70,28 @@ const menubar = (props) => {
     metadata.action = "update";
     metadata.type = "dropdown";
     metadata.number = index;
-    metadata.index = index;
-    setmode("editpagestodropdown");
+    metadata.index = _metadata.index;
+    setmetadata((prev) => metadata);
+    setmode("editpagetodropdown");
   }
 
-  function deleteitem(index) {
-    var metadata = {};
+  function deleteitem(index, number) {
+    var temp = data;
+    if (typeof number == "number") {
+      temp[parseInt(index)].items.splice(parseInt(number), 1);
+    } else {
+      temp.splice(parseInt(index), 1);
+    }
+    const formdata = new FormData();
+    formdata.append("menu", JSON.stringify(temp));
+    formdata.append("data", JSON.stringify({}));
+    post("/api/setmenu", formdata).then((result) => {
+      if (result.error) {
+        alert("error");
+      } else {
+        router.reload();
+      }
+    });
   }
 
   return (
@@ -85,13 +103,30 @@ const menubar = (props) => {
               addpage={addpage}
               adddrop={createdropdown}
               data={data}
-              update={linkedit}
+              editmenu={editmenu}
               listdropdown={listdropdown}
               delete={deleteitem}
             />
           )}
 
-          {mode == "link" && <MenuEditor menu={data} metadata={_metadata} />}
+          {mode == "createmenu" && (
+            <MenuEditor
+              menu={data}
+              data={{ number: 0, action: "createmenu", name: "", text: "" }}
+            />
+          )}
+          {mode == "editmenu" && (
+            <MenuEditor
+              menu={data}
+              data={{
+                number: _metadata.number,
+                action: "editmenu",
+                name: data[_metadata.number].name,
+                text: data[_metadata.number].text,
+                img: data[_metadata.number].img,
+              }}
+            />
+          )}
           {mode == "createdropdown" && (
             <>
               <Form.Group
@@ -137,14 +172,9 @@ const menubar = (props) => {
                     type: "dropdown",
                     items: [],
                   });
-                  formdata.append("data", JSON.stringify(temp));
-                  formdata.append(
-                    "metadata",
-                    JSON.stringify({
-                      type: "dropdown",
-                      action: "createdropdown",
-                    })
-                  );
+                  formdata.append("menu", JSON.stringify(temp));
+                  formdata.append("data", JSON.stringify({}));
+
                   post("/api/setmenu", formdata).then(() => {
                     router.reload();
                   });
@@ -157,8 +187,8 @@ const menubar = (props) => {
 
           {mode == "listdropdown" && (
             <DropdownListing
-              click={() => {}}
-              ondelete={() => {}}
+              click={editpagestodropdown}
+              ondelete={deleteitem}
               addpage={() => {
                 addpagetodropdown();
               }}
@@ -168,7 +198,30 @@ const menubar = (props) => {
           )}
 
           {mode == "addpagetodropdown" && (
-            <MenuEditor menu={data} metadata={_metadata} />
+            <MenuEditor
+              menu={data}
+              data={{
+                number: 0,
+                action: "addpagetodropdown",
+                name: "",
+                text: "",
+                index: _metadata.index,
+              }}
+            />
+          )}
+
+          {mode == "editpagetodropdown" && (
+            <MenuEditor
+              menu={data}
+              data={{
+                number: _metadata.number,
+                action: "editpagetodropdown",
+                name: data[_metadata.index].items[_metadata.number].name,
+                text: data[_metadata.index].items[_metadata.number].text,
+                img: data[_metadata.index].items[_metadata.number].img,
+                index: _metadata.index,
+              }}
+            />
           )}
         </div>
       </ErrorBoundary>

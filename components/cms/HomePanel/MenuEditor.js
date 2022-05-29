@@ -10,6 +10,7 @@ import Sidebar from "../Sidebar";
 import { useRouter } from "next/router";
 
 const MenuEditor = (props) => {
+  const [data, setdata] = useState({});
   const router = useRouter();
   const [mainimage, setmainimage] = React.useState(null);
   const [logo, setlogo] = React.useState(null);
@@ -19,6 +20,11 @@ const MenuEditor = (props) => {
   const [shorteditor, setshorteditor] = React.useState("");
   const [document, setdocument] = React.useState(null);
   const [maindata, setmaindata] = React.useState(null);
+
+  useEffect(() => {
+    setdata(props.data);
+  }, []);
+
   useEffect(() => {
     setname(props.name);
   }, []);
@@ -33,43 +39,21 @@ const MenuEditor = (props) => {
   }, []);
 
   function handleSubmit() {
-    const data = {};
+    const temp = data;
 
     const formdata = new FormData();
     if (mainimage != null) {
       formdata.append("file", mainimage);
-      data.hasimage = true;
+      temp.hasimage = true;
     }
 
     if (document != null) {
       formdata.append("file", document);
-      data.hasdocument = true;
+      temp.hasdocument = true;
     }
 
-    data.name = name;
-
-    data.shortdescription = shorteditor;
-
-    var menu = props.menu;
-    var metadata = props.metadata;
-    metadata.number = parseInt(number);
-    data.type = "link";
-    if (metadata.type == "link") {
-      if (metadata.action == "create") {
-        menu.splice(parseInt(number), 0, data);
-      } else {
-        menu[parseInt(number)] = data;
-      }
-    } else {
-      if (metadata.action == "addpagetodropdown") {
-        menu[metadata.index].items.splice(parseInt(number), 0, data);
-      } else {
-        menu[metadata.index].items[parseInt(number)] = data;
-      }
-    }
-
-    formdata.append("data", JSON.stringify(menu));
-    formdata.append("metadata", JSON.stringify(metadata));
+    formdata.append("data", JSON.stringify(temp));
+    formdata.append("menu", JSON.stringify(props.menu));
 
     post("/api/setmenu", formdata).then((result) => {
       router.reload();
@@ -111,9 +95,9 @@ const MenuEditor = (props) => {
               <Form.Label>Name</Form.Label>
               <Form.Control
                 onChange={(e) => {
-                  setname(e.target.value);
+                  setdata((prev) => ({ ...prev, name: e.target.value }));
                 }}
-                value={name}
+                value={data.name}
                 type="text"
               />
             </Form.Group>
@@ -121,9 +105,9 @@ const MenuEditor = (props) => {
               <Form.Label>Position</Form.Label>
               <Form.Control
                 onChange={(e) => {
-                  setnumber(e.target.value);
+                  setdata((prev) => ({ ...prev, number: e.target.value }));
                 }}
-                value={number}
+                value={data.number}
                 defaultValue="0"
                 type="text"
               />
@@ -136,9 +120,10 @@ const MenuEditor = (props) => {
             <SunEditor
               height="160px"
               onChange={(value) => {
-                setshorteditor(value);
+                setdata((prev) => ({ ...prev, text: value }));
               }}
-              value={shorteditor}
+              value={data.text}
+              defaultValue={props.data.text}
             />
           </div>
         </div>
@@ -161,7 +146,12 @@ const MenuEditor = (props) => {
           >
             Update
           </Button>
-          <img style={{ width: "200px", height: "200px" }} />
+          <img
+            style={{ width: "200px", height: "200px" }}
+            src={
+              typeof data.img == "string" ? data.img : "/uploads/mteverest.jfif"
+            }
+          />
 
           <Form style={{ width: "200px", marginTop: "40px" }}>
             <Form.Group controlId="formFile" className="mb-3">

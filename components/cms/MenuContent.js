@@ -45,8 +45,8 @@ const MenuContent = (props) => {
                   <Button
                     variant="info"
                     onClick={() => {
-                      if (value.type == "link") {
-                        props.update(index);
+                      if (value.type == "menu") {
+                        props.editmenu(index);
                       } else {
                         props.listdropdown(index);
                       }

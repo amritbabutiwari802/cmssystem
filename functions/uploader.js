@@ -35,9 +35,7 @@ const handleintro = (metadata, files, data) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       return schema
         .existsInDatabase()
         .then((exists) => {
@@ -72,6 +70,9 @@ const handleintro = (metadata, files, data) => {
                 .modify('key="home"')
                 .set("page", page)
                 .execute();
+            })
+            .then(() => {
+              session.close();
             });
         });
     });
@@ -88,9 +89,7 @@ const handleSection = (metadata, files, data) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -297,7 +296,10 @@ const handleSection = (metadata, files, data) => {
               return collection
                 .modify('key="home"')
                 .set("page", page)
-                .execute();
+                .execute()
+                .then(() => {
+                  session.close();
+                });
             });
         });
     });

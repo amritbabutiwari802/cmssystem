@@ -15,9 +15,7 @@ const getHome = async () => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       return schema
         .existsInDatabase()
         .then((exists) => {
@@ -43,13 +41,12 @@ const getHome = async () => {
             .then((result) => {
               const lpage = JSON.parse(JSON.stringify(result));
               const page = lpage.page;
+              session.close();
               // console.log(page);
               return page;
             });
         });
     });
-  console.log(data);
-  return data;
 };
 
 export default getHome;

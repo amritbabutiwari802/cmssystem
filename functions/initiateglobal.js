@@ -15,9 +15,7 @@ const globalinitiate = (res) => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       schema
         .existsInDatabase()
         .then((exists) => {
@@ -35,7 +33,9 @@ const globalinitiate = (res) => {
           return collection.add({ key: "global", global: global }).execute();
         })
         .then(() => {
-          res.status(200).json({ success: true }).end();
+          session.close();
+          res.status(200).json({ success: true });
+          res.end();
         });
     });
 };

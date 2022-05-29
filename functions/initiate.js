@@ -45,6 +45,9 @@ const initiate = () => {
                         return collection1
                           .add({ key: "home", metadata })
                           .execute();
+                      })
+                      .then(() => {
+                        session.close();
                       });
                   });
               });

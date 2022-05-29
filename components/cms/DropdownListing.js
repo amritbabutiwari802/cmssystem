@@ -46,7 +46,7 @@ const DropdownListing = (props) => {
                     style={{ marginLeft: "16px" }}
                     variant="danger"
                     onClick={() => {
-                      props.ondelete(index);
+                      props.ondelete(props.metadata.index, index);
                     }}
                   >
                     Delete

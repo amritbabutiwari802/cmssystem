@@ -15,9 +15,7 @@ const getglobal = async () => {
       return result.session;
     })
     .then((session) => {
-      return session.getSchema(config.schema);
-    })
-    .then((schema) => {
+      var schema = session.getSchema(config.schema);
       return schema
         .existsInDatabase()
         .then((exists) => {
@@ -42,14 +40,12 @@ const getglobal = async () => {
             })
             .then((result) => {
               const lpage = JSON.parse(JSON.stringify(result));
-
+              session.close();
               // console.log(page);
               return lpage;
             });
         });
     });
-  console.log(data);
-  return data;
 };
 
 export default getglobal;
