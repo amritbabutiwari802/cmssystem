@@ -9,7 +9,7 @@ import Header, {
   ServicePage,
 } from "../ui/Header/Header";
 
-const pages = (props) => {
+const Pages_skdj93 = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
   useEffect(() => {
     get("/api/getall").then((result) => {
@@ -46,4 +46,4 @@ const pages = (props) => {
   );
 };
 
-export default pages;
+export default Pages_skdj93;

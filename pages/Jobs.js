@@ -8,7 +8,7 @@ import Header, {
   JobContainer,
 } from "../ui/Header/Header";
 
-const pages = (props) => {
+const Pages_kdefd3 = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
   useEffect(() => {
     get("/api/getall").then((result) => {
@@ -45,4 +45,4 @@ const pages = (props) => {
   );
 };
 
-export default pages;
+export default Pages_kdefd3;

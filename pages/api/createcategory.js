@@ -21,7 +21,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-export default async (req, res) => {
+export default async function Create_category (req, res)  {
   try {
     console.log("oooo");
     upload.array("file", 3)(req, {}, (err) => {

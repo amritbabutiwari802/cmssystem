@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 import get from "../http/get";
 
-const editslider = (props) => {
+const Editslider = (props) => {
   const [items, setitems] = useState([]);
 
   React.useEffect(() => {
@@ -17,7 +17,7 @@ const editslider = (props) => {
       setitems(data);
     }
     set_data();
-  }, []);
+  }, [props.pagedata.index]);
 
   const router = useRouter();
   return (
@@ -65,7 +65,7 @@ const editslider = (props) => {
           <tbody>
             {items.map((value, index) => {
               return (
-                <tr style={{ height: "100px" }}>
+                <tr style={{ height: "100px" }} key={index}>
                   <td style={{ height: "100px" }}>
                     <div>
                       {index}
@@ -174,6 +174,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const EditSlider = connect(mapStateToProps, mapDispatchToProps)(editslider);
+const EditSlider = connect(mapStateToProps, mapDispatchToProps)(Editslider);
 
 export default EditSlider;

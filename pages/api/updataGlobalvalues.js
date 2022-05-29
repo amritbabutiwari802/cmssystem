@@ -18,7 +18,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-export default async (req, res) => {
+export default async function operation (req, res)  {
   console.log(req.headers);
   if (req.method != "POST" || req.headers.secret != "skljdfklsdjfkl") {
     res.status(500).json({ dsjkfk: "fjkgtj" });

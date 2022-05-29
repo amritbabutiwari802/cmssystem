@@ -6,7 +6,7 @@ import post from "../http/post";
 import styles from "../styles/images.module.css";
 import { useRouter } from "next/router";
 
-const images = () => {
+const Images_oxk31 = () => {
   const [data, setdata] = useState({ image: [], video: [] });
   const [image, setimage] = useState(null);
   const router = useRouter();
@@ -93,7 +93,7 @@ const images = () => {
   );
 };
 
-export default images;
+export default Images_oxk31;
 
 function getcss(classes) {
   var temp = " ";

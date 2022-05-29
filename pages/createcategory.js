@@ -5,7 +5,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import post from "../http/post";
 import { useRouter } from "next/router";
 
-const jobs_available = () => {
+const Jobs_available = () => {
   const router = useRouter();
   const [category, setcategory] = useState(null);
   const [shorteditor, setshorteditor] = React.useState("");
@@ -65,4 +65,4 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
 });
 
-export default jobs_available;
+export default Jobs_available;

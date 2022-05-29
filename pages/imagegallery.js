@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import get from "../http/get";
 import Header, { AppBar, Footer, ImageContainer } from "../ui/Header/Header";
 
-const pages = (props) => {
+const Pages_ox01 = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
   useEffect(() => {
     get("/api/getall").then((result) => {
@@ -40,9 +40,6 @@ const pages = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { data: state.pagereducer };
-};
-const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(pages);
+
+export default Pages_ox01

@@ -11,7 +11,7 @@ import MenuEditor from "../components/cms/HomePanel/MenuEditor";
 import post from "../http/post";
 import DropdownListing from "../components/cms/DropdownListing";
 
-const menubar = (props) => {
+const MenuBar = (props) => {
   const [_metadata, setmetadata] = useState({});
   const router = useRouter();
   const [mode, setmode] = useState("menu");
@@ -21,7 +21,7 @@ const menubar = (props) => {
 
   useEffect(() => {
     get("/api/getmenu").then((result) => {
-      console.log(_metadata);
+    
       setdata((prev) => JSON.parse(JSON.stringify(result.menu)));
     });
   }, []);
@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const Menubar = connect(mapStateToProps, mapDispatchToProps)(menubar);
+const Menubar = connect(mapStateToProps, mapDispatchToProps)(MenuBar);
 
 export default Menubar;
 

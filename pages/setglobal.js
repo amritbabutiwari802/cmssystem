@@ -5,7 +5,7 @@ import post from "../http/post";
 import { useRouter } from "next/router";
 import get from "../http/get";
 
-const setglobal = () => {
+const Setglobal = () => {
   const router = useRouter();
   const [data, setdata] = useState({
     name: "jhdkjfkds",
@@ -270,4 +270,4 @@ const setglobal = () => {
   );
 };
 
-export default setglobal;
+export default Setglobal;

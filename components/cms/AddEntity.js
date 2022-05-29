@@ -42,7 +42,7 @@ const AddEntity = (props) => {
     };
 
     operation();
-  }, []);
+  }, [props.redux.addentity.metadata]);
 
   function handleSubmit() {
     const data = {};

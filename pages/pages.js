@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import get from "../http/get";
 import Header, { AppBar, Footer } from "../ui/Header/Header";
 
-const pages = (props) => {
+const Pages_gjw6 = (props) => {
   const [data, setdata] = React.useState({ loaded: false });
   useEffect(() => {
     get("/api/getall").then((result) => {
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(pages);
+export default connect(mapStateToProps, mapDispatchToProps)(Pages_gjw6);

@@ -23,20 +23,20 @@ const MenuEditor = (props) => {
 
   useEffect(() => {
     setdata(props.data);
-  }, []);
+  }, [props.data]);
 
   useEffect(() => {
     setname(props.name);
-  }, []);
+  }, [props.name]);
   useEffect(() => {
     setnumber(props.number);
-  }, []);
+  }, [props.number]);
   useEffect(() => {
     setshorteditor(props.text);
-  }, []);
+  }, [props.text]);
   useEffect(() => {
     setmaindata(props.image);
-  }, []);
+  }, [props.image]);
 
   function handleSubmit() {
     const temp = data;

@@ -5,7 +5,7 @@ import styles from "../styles/editslider.module.css";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
-const menubar = (props) => {
+const Menubar = (props) => {
   const router = useRouter();
   return (
     <Sidebar>
@@ -98,6 +98,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const Menubar = connect(mapStateToProps, mapDispatchToProps)(menubar);
+const MenuBar = connect(mapStateToProps, mapDispatchToProps)(Menubar);
 
-export default Menubar;
+export default MenuBar;

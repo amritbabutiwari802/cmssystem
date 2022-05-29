@@ -20,7 +20,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-export default async (req, res) => {
+export default async function operation (req, res) {
   try {
     upload.array("file", 3)(req, {}, (err) => {
       // do error handling here
