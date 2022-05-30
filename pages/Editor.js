@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import get from "../http/get";
+import post from "../http/post";
 
 const Editslider = (props) => {
   const [items, setitems] = useState([]);
@@ -20,6 +21,31 @@ const Editslider = (props) => {
   }, [props.pagedata.index]);
 
   const router = useRouter();
+
+  function ondelete(index) {
+    get("/api/getall").then((response) => {
+      if (response.error) {
+      } else {
+        const home = response.home;
+
+        const data = items;
+        data.splice(index, 1);
+        const temp = editdata(props.pagedata.index, home, data);
+
+        const formdata = new FormData();
+        formdata.append("data", JSON.stringify(temp));
+        formdata.append("metadata", JSON.stringify({ type: "update" }));
+        post("/api/putandpostdata", formdata).then((response) => {
+          if (response.error) {
+            alert("error");
+          } else {
+            setitems((prev) => [...data]);
+          }
+        });
+      }
+    });
+  }
+
   return (
     <Sidebar>
       <div className="heading">DashBoard Control Panel</div>
@@ -109,7 +135,14 @@ const Editslider = (props) => {
                     >
                       Update
                     </Button>
-                    <Button variant="danger">Delete</Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        ondelete(index);
+                      }}
+                    >
+                      Delete
+                    </Button>
                   </td>
                 </tr>
               );
@@ -121,29 +154,9 @@ const Editslider = (props) => {
   );
 };
 
-const data = [
-  {
-    img: "http://gulf-empire.com/uploads/photo_gallery/1567165421_uae.jpg",
-    maintext:
-      "Gulf Empire Company is a young <br>   & dynamic Recruitment Services provider",
-    desc: "Gulf Empire Company clients can depend on our Recruitment Services to help them improve their performance",
-  },
-  {
-    img: "http://gulf-empire.com/uploads/photo_gallery/1567165421_uae.jpg",
-    maintext:
-      "Gulf Empire Company is a young <br>   & dynamic Recruitment Services provider",
-    desc: "Gulf Empire Company clients can depend on our Recruitment Services to help them improve their performance",
-  },
-  {
-    img: "http://gulf-empire.com/uploads/photo_gallery/1567165421_uae.jpg",
-    maintext:
-      "Gulf Empire Company is a young <br>   & dynamic Recruitment Services provider",
-    desc: "Gulf Empire Company clients can depend on our Recruitment Services to help them improve their performance",
-  },
-];
-
 const fetchdata = async (index) => {
-  const data = await get("/api/gethome");
+  const daTa = await get("/api/getall");
+  const data = await daTa.home;
   switch (index) {
     case 1:
       return data.slider;
@@ -162,6 +175,35 @@ const fetchdata = async (index) => {
     default:
       break;
   }
+};
+
+const editdata = (index, data, item) => {
+  switch (index) {
+    case 1:
+      data.slider = item;
+      break;
+    case 3:
+      data.services = item;
+      break;
+    case 4:
+      data.available_jobs = item;
+      break;
+    case 5:
+      data.countries_we_serve = item;
+      break;
+    case 6:
+      data.job_categories = item;
+      break;
+    case 7:
+      data.our_team = item;
+      break;
+    case 8:
+      data.clients = item;
+      break;
+    default:
+      break;
+  }
+  return data;
 };
 
 const mapStateToProps = (state) => {

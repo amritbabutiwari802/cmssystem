@@ -4,8 +4,7 @@ import { Button, Table } from "react-bootstrap";
 const MenuContent = (props) => {
   return (
     <div>
-      <div> MEDIA LIST</div>
-      <div>
+      <div style={{ marginTop: "25px" }}>
         <Button
           onClick={() => {
             props.addpage();
@@ -23,7 +22,12 @@ const MenuContent = (props) => {
         </Button>
       </div>
 
-      <Table bordered hover className="sliderform">
+      <Table
+        bordered
+        hover
+        className="sliderform"
+        style={{ marginTop: "25px" }}
+      >
         <thead>
           <tr>
             <th>SN</th>
@@ -35,8 +39,8 @@ const MenuContent = (props) => {
         <tbody>
           {props.data.map((value, index) => {
             return (
-              <tr style={{ height: "100px" }} key={index}>
-                <td style={{ height: "100px" }}>
+              <tr style={{ height: "40px" }} key={index}>
+                <td style={{ height: "40px" }}>
                   <div>{index}</div>
                 </td>
                 <td>{value.name}</td>

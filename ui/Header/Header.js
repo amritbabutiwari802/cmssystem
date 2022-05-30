@@ -62,7 +62,10 @@ const Appbar = (props) => {
           Home
         </div>
         {props.menu.map((value, index) => {
-          if (value.type == "menu" && !["Gallery"].includes(value.name)) {
+          if (
+            value.type == "menu" &&
+            !["Gallery", "Services", "Jobs"].includes(value.name)
+          ) {
             return (
               <div
                 className={styles.menuitem}
@@ -83,8 +86,6 @@ const Appbar = (props) => {
               <div
                 className={styles.menuitem}
                 onClick={async () => {
-                  await props.saveData(value);
-
                   router.push("/" + value.name);
                 }}
               >
@@ -120,7 +121,7 @@ const Appbar = (props) => {
                 </Dropdown.Menu>
               </Dropdown>
             );
-          } else {
+          } else if (value.type == "dropdown") {
             return (
               <Dropdown>
                 <Dropdown.Toggle
@@ -132,18 +133,19 @@ const Appbar = (props) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {value.items.map((item, itemindex) => (
-                    <>
-                      <Dropdown.Item
-                        onClick={async () => {
-                          await props.saveData(item);
-                          router.push("/pages");
-                        }}
-                      >
-                        {item.name}
-                      </Dropdown.Item>
-                    </>
-                  ))}
+                  {value.items.length > 0 &&
+                    value.items.map((item, itemindex) => (
+                      <>
+                        <Dropdown.Item
+                          onClick={async () => {
+                            await props.saveData(item);
+                            router.push("/pages");
+                          }}
+                        >
+                          {item.name}
+                        </Dropdown.Item>
+                      </>
+                    ))}
                 </Dropdown.Menu>
               </Dropdown>
             );
@@ -471,9 +473,6 @@ const OurTeam = (props) => {
                       }}
                     />
                   </Card.Text>
-                  <Button color="white" variant="info">
-                    View Jobs
-                  </Button>
                 </Card.Body>
               </Card>
             ))}

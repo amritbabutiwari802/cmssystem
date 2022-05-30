@@ -609,6 +609,14 @@
       justify-content: center;
       gap: 25px;
     }
+
+    .jobcontainer {
+      padding-top: 55px;
+      padding-bottom: 55px;
+      padding-left: 10%;
+      padding-right: 10%;
+      min-height: 400px;
+    }
   }
 }
 
@@ -912,6 +920,15 @@
       justify-content: center;
       gap: 25px;
     }
+
+    .jobcontainer {
+      padding-top: 55px;
+      padding-bottom: 55px;
+      padding-left: 10%;
+      padding-right: 10%;
+      min-height: 400px;
+    }
+    
   }
 }
 

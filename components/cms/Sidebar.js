@@ -20,7 +20,7 @@ const Sidebar = (props) => {
           >
             <FontAwesomeIcon
               className={styles.icon}
-              style={{ color: "white", height: "50px" }}
+              style={{ color: "white", height: "10px" }}
               icon={faHome}
             />
             <div className={styles.label}>Home</div>
@@ -34,33 +34,68 @@ const Sidebar = (props) => {
           >
             <FontAwesomeIcon
               className={styles.icon}
-              style={{ color: "white", height: "50px" }}
+              style={{ color: "white", height: "10px" }}
               icon={faList}
             />
             <div className={styles.label}>MenuBar</div>
           </div>
-
+          <div
+            className={styles.icon_wrapper}
+            onClick={() => {
+              router.push("/createcategory");
+            }}
+          >
+            <FontAwesomeIcon
+              className={styles.icon}
+              style={{ color: "white", height: "10px" }}
+              icon={faList}
+            />
+            <div className={styles.label}>Jobs Categories</div>
+          </div>
+          <div
+            className={styles.icon_wrapper}
+            onClick={() => {
+              router.push("/jobs_available");
+            }}
+          >
+            <FontAwesomeIcon
+              className={styles.icon}
+              style={{ color: "white", height: "10px" }}
+              icon={faList}
+            />
+            <div className={styles.label}>Jobs Available</div>
+          </div>
           <div className={styles.icon_wrapper}>
             <FontAwesomeIcon
               className={styles.icon}
-              style={{ color: "white", height: "50px" }}
+              style={{ color: "white", height: "10px" }}
               icon={faList}
             />
             <div className={styles.label}>Jobs Application</div>
           </div>
 
-          <div className={styles.icon_wrapper}>
+          <div
+            className={styles.l_icon_wrapper}
+            onClick={() => {
+              router.push("/images");
+            }}
+          >
             <FontAwesomeIcon
               className={styles.icon}
-              style={{ color: "white", height: "50px" }}
+              style={{ color: "white", height: "10px" }}
               icon={faList}
             />
-            <div className={styles.label}>Social Media</div>
+            <div className={styles.label}>Image Gallery</div>
           </div>
-          <div className={styles.l_icon_wrapper}>
+          <div
+            className={styles.l_icon_wrapper}
+            onClick={() => {
+              router.push("/setglobal");
+            }}
+          >
             <FontAwesomeIcon
               className={styles.icon}
-              style={{ color: "white", height: "50px" }}
+              style={{ color: "white", height: "10px" }}
               icon={faList}
             />
             <div className={styles.label}>Global Values</div>
