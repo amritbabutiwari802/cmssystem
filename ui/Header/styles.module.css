@@ -1,3 +1,54 @@
+.countriesWe{
+  width:250px !important;
+}
+
+.client{
+  width:200px !important;
+  height:101px !important;
+}
+
+.teamcontainer{
+  height:520px;
+  margin-left:15%;
+  margin-right:15%;
+  padding-top:55px;
+  background: linear-gradient(
+    to top, 
+    #ffffff 0%, 
+    #ffffff 50%, 
+    #A3BBDE 50%, 
+    #A3BBDE 100%
+  );
+}
+
+.teamheding{
+ color: white;
+ text-align:center;
+ font-size:40px;
+ font-weight:500
+
+}
+.teammapper{
+  margin-top:70px;
+  display: flex;
+  justify-content: center;
+  gap:100px;
+}
+
+.team{
+height:210px !important;
+width:210px !important;
+border-radius: 130px;
+
+}
+.teamcard{
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+
+
 @media (min-width: 1500px) {
   .container {
     display: flex;
@@ -7,7 +58,7 @@
     height: 40px;
     align-items: center;
     color: white;
-    background-color: #AF9360 ;
+    background-color: #267adf ;
     font-size: 9px;
   }
 
@@ -242,12 +293,16 @@ color:#333333 !important;
   .jobs_card_available {
     height: 160px !important;
   }
-
+  .jobs_cad_available {
+    height: 100px !important;
+    width:100px !important;
+    border-radius: 70px;
+  }
   .jobsheading {
-    font-size: 34px;
+    font-size: 25px;
     margin-bottom: 25px;
     color: black;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .jobs_categories_bx {
@@ -268,6 +323,10 @@ color:#333333 !important;
     padding-bottom: 40px;
     
   }
+
+ 
+  
+
 
   /* footor */
   .footer_container {

@@ -377,14 +377,12 @@ const Countries_we_serve = (props) => {
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
             {value.map((lvalue, index) => (
-              <Card className={styles.servicescard}>
-                <Card.Img
-                  variant="top"
-                  src={lvalue.img}
-                  className={styles.jobs_card_available}
-                />
+              <Card className={styles.countriesWe}>
+               
                 <Card.Body>
                   <Card.Text>
+                    <img   src={lvalue.img}
+                  className={styles.jobs_cad_available} />
                     <div
                       dangerouslySetInnerHTML={{
                         __html: lvalue.shortdescription,
@@ -410,7 +408,7 @@ const Jobs_available = (props) => {
   }, []);
   return (
     <div className={styles.jobs_categories_box}>
-      <div className={styles.jobsheading}> Jobs_available</div>
+      <div className={styles.jobsheading}> Job you Can Apply For</div>
       <Carousel
         className={styles.servicecontainer}
         showThumbs={false}
@@ -468,27 +466,16 @@ const OurTeam = (props) => {
     setdata(mapArray(props.our_team));
   }, []);
   return (
-    <div className={styles.jobs_categories_box}>
-      <div className={styles.jobsheading}> Our Team</div>
-      <Carousel
-        className={styles.servicecontainer}
-        showThumbs={false}
-        axis="horizontal"
-        autoPlay={true}
-        infiniteLoop={true}
-        showIndicators={false}
-      >
+    <div className={styles.teamcontainer}>
+      <div className={styles.teamheding}> Our Team</div>
+     
         {data.map((value, index) => (
-          <div className={styles.servicesmapper}>
+          <div className={styles.teammapper}>
             {value.map((lvalue, index) => (
-              <Card className={styles.servicescard}>
-                <Card.Img
-                  variant="top"
-                  src={lvalue.img}
-                  className={styles.jobs_card_available}
-                />
-                <Card.Body>
-                  <Card.Text>
+              <div className={styles.teamcard}>
+             
+                    <img   src={lvalue.img}
+                  className={styles.team} />
                     <div
                       dangerouslySetInnerHTML={{
                         __html: lvalue.shortdescription,
@@ -499,13 +486,12 @@ const OurTeam = (props) => {
                         __html: lvalue.detaildescription,
                       }}
                     />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+                
+              </div>
             ))}
           </div>
         ))}
-      </Carousel>
+    
     </div>
   );
 };
@@ -528,16 +514,17 @@ const OurClient = (props) => {
         showIndicators={false}
       >
         {data.map((value, index) => (
-          <div className={styles.servicesmapper}>
+          <div className={styles.servicesmapper} key={index}>
             {value.map((lvalue, index) => (
-              <Card className={styles.servicescard}>
-                <Card.Img
+           
+                <img
+                key={index}
                   variant="top"
                   src={lvalue.img}
-                  className={styles.jobs_card_available}
+                  className={styles.client}
                 />
                
-              </Card>
+             
             ))}
           </div>
         ))}
