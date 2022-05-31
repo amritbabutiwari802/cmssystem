@@ -18,25 +18,23 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-export default async function operation (req, res)  {
+export default async function operation(req, res) {
   try {
-    upload.array();
-    upload.array("file", 3)(req, {}, (err) => {
+    console.log("point");
+    await upload.array("file", 3)(req, {}, async (err) => {
       // do error handling here
       // do something with the files here
 
       const files = req.files;
       const metadata = JSON.parse(
-        JSON.parse(JSON.stringify(req.body.metadata))
+        JSON.parse(JSON.stringify(req.body)).metadata
       );
-      const data = JSON.parse(JSON.parse(JSON.stringify(req.body.data)));
-      console.log(typeof metadata);
-      upoadservice(metadata, files, data);
+      const data = JSON.parse(JSON.parse(JSON.stringify(req.body)).data);
+
+      await upoadservice(metadata, files, data, res);
     });
   } catch (err) {
     res.status(200).json({ data: err });
     res.end();
   }
-  res.status(200).json({ ok: "sjdf" });
-  res.end();
-};
+}

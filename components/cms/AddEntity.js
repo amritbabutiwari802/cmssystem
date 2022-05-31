@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
+import { Alert, Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import dynamic from "next/dynamic";
 import "suneditor/dist/css/suneditor.min.css";
 import { connect } from "react-redux";
 import post from "../../http/post";
 import get from "../../http/get";
+import { useRouter } from "next/router";
 
 const AddEntity = (props) => {
   const [isfirst, setfirst] = useState(true);
-
+  const [show, setShow] = useState(true);
   const [mainimage, setmainimage] = React.useState(null);
   const [logo, setlogo] = React.useState(null);
   const [name, setname] = React.useState("");
@@ -23,7 +24,7 @@ const AddEntity = (props) => {
     img1: "http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg",
     img2: "http://gulf-empire.com/uploads/icon_image/1566714228_introbanner.jpg",
   });
-
+  const router = useRouter();
   useEffect(() => {
     const operation = async () => {
       const givendata = props.redux.addentity.metadata;
@@ -73,7 +74,7 @@ const AddEntity = (props) => {
     formdata.append("metadata", JSON.stringify(givendata));
     post("http://localhost:3000/api/putandpostdata", formdata).then(
       (result) => {
-        console.log(result);
+        alert("success");
       }
     );
   }
@@ -208,6 +209,14 @@ const AddEntity = (props) => {
               paddingRight: "55px",
             }}
           >
+            <Button
+              style={{ width: "200px", marginBottom: "25px" }}
+              onClick={() => {
+                router.push("/Editor");
+              }}
+            >
+              Go Back
+            </Button>
             <Button
               style={{ width: "200px", marginBottom: "25px" }}
               onClick={handleSubmit}

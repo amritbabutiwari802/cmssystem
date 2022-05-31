@@ -142,6 +142,15 @@ const MenuEditor = (props) => {
         >
           <Button
             style={{ width: "200px", marginBottom: "25px" }}
+            variant="danger"
+            onClick={() => {
+              props.GoBack();
+            }}
+          >
+            Go Back
+          </Button>
+          <Button
+            style={{ width: "200px", marginBottom: "25px" }}
             onClick={handleSubmit}
           >
             Update

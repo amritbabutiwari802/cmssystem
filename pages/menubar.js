@@ -21,7 +21,6 @@ const MenuBar = (props) => {
 
   useEffect(() => {
     get("/api/getmenu").then((result) => {
-    
       setdata((prev) => JSON.parse(JSON.stringify(result.menu)));
     });
   }, []);
@@ -113,6 +112,10 @@ const MenuBar = (props) => {
             <MenuEditor
               menu={data}
               data={{ number: 0, action: "createmenu", name: "", text: "" }}
+              GoBack={() => {
+                setmetadata({});
+                setmode("menu");
+              }}
             />
           )}
           {mode == "editmenu" && (
@@ -124,6 +127,10 @@ const MenuBar = (props) => {
                 name: data[_metadata.number].name,
                 text: data[_metadata.number].text,
                 img: data[_metadata.number].img,
+              }}
+              GoBack={() => {
+                setmetadata({});
+                setmode("menu");
               }}
             />
           )}
@@ -191,6 +198,10 @@ const MenuBar = (props) => {
               ondelete={deleteitem}
               addpage={() => {
                 addpagetodropdown();
+              }}
+              go_to_main_page={() => {
+                setmetadata({});
+                setmode("menu");
               }}
               data={data}
               metadata={_metadata}

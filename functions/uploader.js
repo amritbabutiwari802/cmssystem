@@ -6,7 +6,8 @@ const config = {
   collection1: "menu",
 };
 
-export default function upoadservice(metadata, files, data) {
+export default async function upoadservice(metadata, files, data, res) {
+  console.log(metadata.type);
   switch (metadata.type) {
     case "introduction":
       handleintro(metadata, files, data);
@@ -19,6 +20,45 @@ export default function upoadservice(metadata, files, data) {
       handleMenubar(metadata, files, data);
       break;
     case "dropdown":
+      break;
+    case "update":
+      return await getSession()
+        .then((result) => {
+          if (!result.success) {
+            // handle failed db connection
+            return { success: false };
+          }
+          return result.session;
+        })
+        .then((session) => {
+          var schema = session.getSchema(config.schema);
+          return schema
+            .existsInDatabase()
+            .then((exists) => {
+              if (exists) {
+                return schema;
+              }
+              return session.createSchema(config.schema);
+            })
+            .then((schema) => {
+              return schema.createCollection(config.collection, {
+                reuseExisting: true,
+              });
+            })
+            .then((collection) => {
+              return collection
+                .modify('key="home"')
+                .set("page", data)
+                .execute();
+            })
+            .then(() => {
+              console.log("ended");
+              session.close();
+
+              res.status(200).json({ success: true });
+              res.end();
+            });
+        });
       break;
     default:
       break;

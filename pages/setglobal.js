@@ -25,7 +25,7 @@ const Setglobal = () => {
   });
 
   useEffect(() => {
-    get("/api/getglobal").then((result) => {
+    get("/api/getall").then((result) => {
       setdata(result.global);
     });
   }, []);
