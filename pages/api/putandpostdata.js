@@ -19,6 +19,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 export default async function operation(req, res) {
+  console.log("staring")
   try {
   
     await upload.array("file", 3)(req, {}, async (err) => {
