@@ -4,10 +4,11 @@
     justify-content: space-between;
     padding-left: 10%;
     padding-right: 10%;
-    height: 70px;
+    height: 40px;
     align-items: center;
     color: white;
-    background-color: #0070d2;
+    background-color: #AF9360 ;
+    font-size: 9px;
   }
 
   .logocontainer {
@@ -16,12 +17,17 @@
     padding-top: 16px;
     padding-bottom: 16px;
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    gap:700px;
+    align-items: center;
+   
   }
 
   .logo {
     width: 200px;
     max-height: 70px;
+    justify-self: center;
+    margin-right:100px;
   }
 
   .socialcontainer {
@@ -30,21 +36,22 @@
   }
 
   .socialmedia {
-    max-width: 25px;
-    max-height: 25px;
+    max-width: 14px;
+    max-height: 14px;
   }
 
   /* //appbar */
 
   .appbar {
-    height: 55px;
+    height: 100px;
     padding-left: 10px;
     padding-right: 25px;
     margin-left: 10%;
     margin-right: 10%;
-    background-color: #0070d2;
+
     display: flex;
-    color: white;
+    align-items: center;
+    color: #222222;
     justify-content: space-between;
   }
   .appbarcontainer {
@@ -52,7 +59,7 @@
     padding-left: 10px;
 
     display: flex;
-    color: white;
+    color: #333333;
     gap: 10px;
   }
 
@@ -61,9 +68,9 @@
     padding-right: 7px;
     
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     text-transform: uppercase;
-    background-color: #0070d2 !important;
+  
     align-self:center;
     border-style: none !important;
 
@@ -71,31 +78,34 @@
     
   }
   .menuitem:hover {
-    background-color: #4b4b7d;
+  
     cursor: pointer !important;
   }
   .dropdownitem {
     padding-left: 7px;
     padding-right: 7px;
-
+color:#333333 !important;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     text-transform: uppercase;
-    background-color: #0070d2 !important;
+    background-color: white !important;
     height: 100%;
     border-style: none !important;
+    box-shadow: none !important;
+    
   }
   .dropdownitem:hover {
-    background-color: #4b4b7d !important;
+    
     cursor: pointer;
   }
+  
 
   .apply {
     padding-left: 7px;
-    padding-right: 7px;
+
     padding-top: 16px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 13px;
     text-transform: uppercase;
     justify-self: flex-end;
   }
@@ -107,13 +117,16 @@
   /* slider container */
 
   .slidercontainer {
-    padding-left: 10%;
-    padding-right: 10%;
+   height:150px;
+   height: 82vh;
+    
   }
-
+  .sliderimagecontainer{
+  
+  }
   .sliderimage {
     width: 100%;
-    height: 550px;
+    height: 82vh;
   }
 
   /*introduction*/
@@ -123,12 +136,15 @@
     padding-right: 10%;
     display: flex;
     gap: 100px;
-    padding-top: 55px;
+  
+    height:85vh;
+    position: relative;
+    background-color:#F2F2F0;
   }
 
   .intro_image {
     width: 400px;
-    height: 245px;
+    height: 80vh;
   }
 
   .introduction_text_container_box {
@@ -136,14 +152,46 @@
   }
 
   .introduction_heading {
-    font-size: 31px;
-    font-weight: 700;
+    font-size: 19px;
+    font-weight: 500;
     color: #636363;
+    text-transform:uppercase;
+    margin-top:70px;
+    margin-bottom:16px
+  }
+  .introduction_subheading {
+    font-size: 34px;
+    font-weight: 500;
+    color: #DFC370;
+    text-transform:uppercase
+  }
+  .introduction_loadmore{
+    background-color:#DFC370 !important ; 
+    border-style: solid;
+    border-width: 2px;
+    border-color: #DFC370 !important ;
+    box-shadow:none !important;
   }
 
-  .introduction_shortdescription {
-    color: #8c8c8c;
+
+  .introduction_loadmore:hover{
+    background-color:white !important ; 
+    border-style: solid;
+    border-width: 2px;
+    border-color: #DFC370 !important ;
+    color:#DFC370 ;
   }
+
+
+  .introduction_shortdescription {
+    color: #DFC370  !important ;
+    margin-top:40px;
+    margin-bottom:37px;
+    width:500px
+
+
+  }
+  
 
   /*services*/
 
@@ -159,14 +207,14 @@
     justify-content: center;
     align-items: center;
 
-    background-image: url("/uploads/mteverest.jfif");
-    margin-top: 55px;
+    background-image: url("/uploads/dubaidark.jpg");
+ height:70vh;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 40px;
-    padding-bottom: 70px;
-    margin-left: 10%;
-    margin-right: 10%;
+    padding-bottom: 82px;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 
   .servicecontainer {
@@ -202,12 +250,23 @@
     font-weight: 700;
   }
 
+  .jobs_categories_bx {
+    display: flex;
+    height:49vh;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url("http://webdesign-finder.com/human-consult/wp-content/uploads/2017/06/texture2.jpg");
+  }
+
   .jobs_categories_box {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
+    
   }
 
   /* footor */

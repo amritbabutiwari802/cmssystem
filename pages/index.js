@@ -39,9 +39,9 @@ export default function Home() {
             registration={data.global.registration}
           />
 
-          <AppBar menu={data.menu} />
+          <AppBar menu={data.menu} global={data.global}/>
           <Slider slider={data.pagedata.slider} />
-          <Introduction introduction={data.pagedata.introduction} />
+          <Introduction introduction={data.pagedata.introduction} global={data.global}/>
           <Services services={data.pagedata.services} />
           <Jobs_categories jobs_categories={data.pagedata.job_categories} />
           <Countries_we_serve

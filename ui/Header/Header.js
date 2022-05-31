@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./styles.module.css";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 const Header = (props) => {
   return (
@@ -16,17 +17,10 @@ const Header = (props) => {
           <div>Registration No. {props.registration}</div>
         </div>
         <div>
-          Phone : {props.global.phone}
-          <br />
-          Email : {props.global.email}
-        </div>
-      </div>
-      <div className={styles.logocontainer}>
-        <img src={props.global.img} className={styles.logo} />
         <div className={styles.socialcontainer}>
           <img
             className={styles.socialmedia}
-            src="https://www.facebook.com/images/fb_icon_325x325.png"
+            src="https://www.pngitem.com/pimgs/m/11-117236_transparent-facebook-icon-clipart-black-icon-fb-png.png"
           />
 
           <img
@@ -39,18 +33,47 @@ const Header = (props) => {
           />
           <img className={styles.socialmedia} src="/twitter.png" />
         </div>
+        </div>
       </div>
+    
     </>
   );
 };
 
 export default Header;
 
-const Appbar = (props) => {
+const Apbar = dynamic(() => APPBAR, {
+  ssr: false,
+});
+
+function Appbar(props) {
+  const [stickyClass, setStickyClass] = useState('relative');
+
+  useEffect(() => {
+    window.addEventListener('scroll', stickNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', stickNavbar);
+    };
+  }, []);
+
+  const stickNavbar = () => {
+    if (window !== undefined) {
+      let windowHeight = window.scrollY;
+      windowHeight > 500 ? setStickyClass('fixed top-0 left-0 z-50') : setStickyClass('relative');
+    }
+  };
+
+  return <ApPbar {...props} />;
+}
+
+
+const ApPbar = (props) => {
   const router = useRouter();
   return (
     <div className={styles.appbar}>
       <div className={styles.appbarcontainer}>
+      <img src={props.global.img} className={styles.logo} />
         <div
           className={styles.menuitem}
           onClick={async () => {
@@ -193,9 +216,13 @@ const Slider = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        className={styles.sliderimagecontainer}
+        showIndicators={false}
       >
         {props.slider.map((value, index) => (
-          <img className={styles.sliderimage} src={value.img} />
+          
+          <img className={styles.sliderimage} src={value.img}key={index} />
+         
         ))}
       </Carousel>
     </div>
@@ -206,7 +233,8 @@ const Introduction = (props) => {
   return (
     <div className={styles.introduction}>
       <div className={styles.introduction_text_container_box}>
-        <div className={styles.introduction_heading}>Company Profile</div>
+        <div className={styles.introduction_heading}>WELCOME TO {props.global.name}</div>
+        <div className={styles.introduction_subheading}>WHY CHOOSE US ?</div>
         <div className={styles.introduction_shortdescription}>
           <div
             dangerouslySetInnerHTML={{
@@ -214,11 +242,11 @@ const Introduction = (props) => {
             }}
           />
         </div>
-        <Button color="white" variant="info">
+        <Button  bsClass="custom-btn"color="white"  className={styles.introduction_loadmore}>
           Load More
         </Button>
       </div>
-      <img className={styles.intro_image} src={props.introduction.image} />
+      <img className={styles.intro_image} src="/uploads/mamager_r.png" />
     </div>
   );
 };
@@ -239,6 +267,7 @@ const Services = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
@@ -293,7 +322,7 @@ const Jobs_categories = (props) => {
     setdata(mapArray(props.jobs_categories));
   }, []);
   return (
-    <div className={styles.jobs_categories_box}>
+    <div className={styles.jobs_categories_bx}>
       <div className={styles.jobsheading}> Jobs Categories</div>
       <Carousel
         className={styles.servicecontainer}
@@ -301,27 +330,23 @@ const Jobs_categories = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
             {value.map((lvalue, index) => (
               <Card className={styles.servicescard}>
-                <Card.Img
-                  variant="top"
-                  src={lvalue.img}
-                  className={styles.jobs_card_available}
-                />
+              
                 <Card.Body>
-                  <Card.Text>
+                 <img  src={lvalue.img}
+                  className={styles.jobs_card_available} />
                     <div
                       dangerouslySetInnerHTML={{
                         __html: lvalue.category,
                       }}
                     />
-                  </Card.Text>
-                  <Button color="white" variant="info">
-                    View Jobs
-                  </Button>
+               
+                 
                 </Card.Body>
               </Card>
             ))}
@@ -347,6 +372,7 @@ const Countries_we_serve = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
@@ -365,9 +391,7 @@ const Countries_we_serve = (props) => {
                       }}
                     />
                   </Card.Text>
-                  <Button color="white" variant="info">
-                    View Jobs
-                  </Button>
+              
                 </Card.Body>
               </Card>
             ))}
@@ -393,6 +417,8 @@ const Jobs_available = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
+        
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
@@ -408,7 +434,7 @@ const Jobs_available = (props) => {
                     <div>{lvalue.name}</div>
                     <div>{lvalue.country}</div>
                   </Card.Text>
-                  <Button color="white" variant="info">
+                  <Button color="white"  className={styles.introduction_loadmore}>
                     View Jobs
                   </Button>
                 </Card.Body>
@@ -450,6 +476,7 @@ const OurTeam = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
@@ -498,6 +525,7 @@ const OurClient = (props) => {
         axis="horizontal"
         autoPlay={true}
         infiniteLoop={true}
+        showIndicators={false}
       >
         {data.map((value, index) => (
           <div className={styles.servicesmapper}>
@@ -508,15 +536,7 @@ const OurClient = (props) => {
                   src={lvalue.img}
                   className={styles.jobs_card_available}
                 />
-                <Card.Body>
-                  <Card.Text>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: lvalue.shortdescription,
-                      }}
-                    />
-                  </Card.Text>
-                </Card.Body>
+               
               </Card>
             ))}
           </div>
