@@ -72,7 +72,7 @@ const AddEntity = (props) => {
     data.detaildescription = maineditor;
     formdata.append("data", JSON.stringify(data));
     formdata.append("metadata", JSON.stringify(givendata));
-    post("http://localhost:3000/api/putandpostdata", formdata).then(
+    post("/api/putandpostdata", formdata).then(
       (result) => {
         alert("success");
       }
