@@ -7,7 +7,7 @@ const config = {
 };
 
 export default async function upoadservice(metadata, files, data, res) {
-  console.log(metadata.type);
+  console.log("metadata service");
   switch (metadata.type) {
     case "introduction":
       handleintro(metadata, files, data);
