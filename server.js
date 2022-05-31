@@ -2,12 +2,37 @@ const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
 
+const cluster = require("cluster");
+const totalCPUs = require("os").cpus().length;
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
-const port = 80
+const port = 3000
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
+
+
+
+if (cluster.isMaster) {
+  console.log(`Number of CPUs is ${totalCPUs}`);
+  console.log(`Master ${process.pid} is running`);
+ 
+  // Fork workers.
+  for (let i = 0; i < totalCPUs; i++) {
+    cluster.fork();
+  }
+ 
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    console.log("Let's fork another worker!");
+    cluster.fork();
+  });
+} else {
+
+
+
+
+
 
 app.prepare().then(() => {
   createServer(async (req, res) => {
@@ -34,3 +59,5 @@ app.prepare().then(() => {
     console.log(`> Ready on http://${hostname}:${port}`)
   })
 })
+
+}
