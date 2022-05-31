@@ -2,11 +2,11 @@
   "name": "cmssystem",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -33,3 +33,7 @@
     "eslint-config-next": "12.1.6"
   }
 }
+
+
+
+
