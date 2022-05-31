@@ -9,7 +9,7 @@ const config = {
 };
 
 export default async function getSession() {
-  console.log("dbservice");
+  console.log("dbpoint");
   var session;
   try {
     session = await mysqlx.getSession(config);

@@ -20,7 +20,7 @@ var upload = multer({ storage: storage });
 
 export default async function operation(req, res) {
   try {
-    console.log("point");
+  
     await upload.array("file", 3)(req, {}, async (err) => {
       // do error handling here
       // do something with the files here
