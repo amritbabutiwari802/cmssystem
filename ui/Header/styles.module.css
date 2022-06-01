@@ -7,37 +7,25 @@
   height:101px !important;
 }
 
-.teamcontainer{
-  height:520px;
-  margin-left:15%;
-  margin-right:15%;
-  padding-top:55px;
-  background: linear-gradient(
-    to top, 
-    #ffffff 0%, 
-    #ffffff 50%, 
-    #A3BBDE 50%, 
-    #A3BBDE 100%
-  );
-}
+
 
 .teamheding{
- color: white;
+ color: #D66B36;
  text-align:center;
  font-size:40px;
- font-weight:500
+ font-weight:900
 
 }
 .teammapper{
   margin-top:70px;
   display: flex;
   justify-content: center;
-  gap:100px;
+  gap:10px;
 }
 
 .team{
-height:210px !important;
-width:210px !important;
+height:130px !important;
+width:130px !important;
 border-radius: 130px;
 
 }
@@ -45,8 +33,43 @@ border-radius: 130px;
   display: flex;
   flex-direction:column;
   align-items:center;
+  height:400px;
+  background-color:#FEFEFE;
+  width:200px;
+  border-radius:10px;
+  padding-top:25px;
+  box-shadow: 2px 2px #A0A0A0;
 }
 
+.teamname{
+  margin-top:25px;
+  font-size:10px;
+  padding-left:25PX;
+  padding-right:25px;
+}
+
+.countriescontainer{
+  display:flex;
+  gap:25px;
+}
+
+
+.menubar{
+  display:none;
+}
+
+.mobilejobs{
+  display:none
+}
+
+.footercontainer{
+  display: flex;
+  justify-content: space-between;
+  height:40px;
+  align-items:center;
+  padding-left:10%;
+  padding-right:10%;
+}
 
 
 @media (min-width: 1500px) {
@@ -59,7 +82,7 @@ border-radius: 130px;
     align-items: center;
     color: white;
     background-color: #267adf ;
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .logocontainer {
@@ -119,7 +142,7 @@ border-radius: 130px;
     padding-right: 7px;
     
     font-weight: 500;
-    font-size: 13px;
+    font-size: 16px;
     text-transform: uppercase;
   
     align-self:center;
@@ -137,7 +160,7 @@ border-radius: 130px;
     padding-right: 7px;
 color:#333333 !important;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 16px;
     text-transform: uppercase;
     background-color: white !important;
     height: 100%;
@@ -169,7 +192,7 @@ color:#333333 !important;
 
   .slidercontainer {
    height:150px;
-   height: 82vh;
+   height: 70vh;
     
   }
   .sliderimagecontainer{
@@ -177,7 +200,7 @@ color:#333333 !important;
   }
   .sliderimage {
     width: 100%;
-    height: 82vh;
+    height: 70vh;
   }
 
   /*introduction*/
@@ -188,14 +211,14 @@ color:#333333 !important;
     display: flex;
     gap: 100px;
   
-    height:85vh;
+    height:61vhvh;
     position: relative;
     background-color:#F2F2F0;
   }
 
   .intro_image {
     width: 400px;
-    height: 80vh;
+    height: 61vh;
   }
 
   .introduction_text_container_box {
@@ -248,8 +271,16 @@ color:#333333 !important;
 
   .servicesmapper {
     display: flex;
+   
     gap: 25px;
     justify-content: center;
+  }
+
+ .servicesmap {
+    display: grid;
+   grid-template-columns: 250px 250px 250px 250px ;
+    gap: 25px;
+
   }
 
   .servicescontainer {
@@ -258,8 +289,8 @@ color:#333333 !important;
     justify-content: center;
     align-items: center;
 
-    background-image: url("/uploads/dubaidark.jpg");
- height:70vh;
+    /* background-image: url("/uploads/dubaidark.jpg"); */
+ height:55vh;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 40px;
@@ -278,6 +309,17 @@ color:#333333 !important;
     width: 100%;
   }
 
+  .jobs_available_crousal{
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 15%;
+      padding-right: 15%;
+      width: 100%;
+  }
+
   .servicescard {
     width: 310px;
     background-color: #f8f8f8;
@@ -286,23 +328,45 @@ color:#333333 !important;
   .serviceheading {
     font-size: 34px;
     margin-bottom: 25px;
-    color: white;
+ margin-top:25px;
     font-weight: 700;
+  }
+
+  .servicediv{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    align-items:center;
+  }
+  .serviceimg{
+    height:100px;
+    width:100px;
+    border-radius:70px
+  }
+
+  .servicetext{
+    font-size: 19px;
+    font-weight:700
   }
 
   .jobs_card_available {
     height: 160px !important;
+    width:250px
   }
   .jobs_cad_available {
     height: 100px !important;
     width:100px !important;
     border-radius: 70px;
   }
+  .jobcard{
+    width:250px !important;
+
+  }
   .jobsheading {
-    font-size: 25px;
+    font-size: 40px;
     margin-bottom: 25px;
     color: black;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   .jobs_categories_bx {
@@ -314,18 +378,50 @@ color:#333333 !important;
     padding-bottom: 40px;
     background-image: url("http://webdesign-finder.com/human-consult/wp-content/uploads/2017/06/texture2.jpg");
   }
-
   .jobs_categories_box {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
+    padding-left: 15%;
+    padding-right: 15%;
+  
+    
+  }
+  .jobavailable_container{
+    width:100%;
+    display:grid;
+    grid-template-columns: 280px 280px 280px 280px;
+    justify-content: center;
+    gap:70px
+  }
+  .jobs_available_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url("/uploads/dubaidark.jpg");
     
   }
 
- 
+  .countryname{
+    font-size: 55px;
+    font-weight: 900px;
+  }
+
   
+
+ 
+  .teamcontainer{
+    margin-top: 40px;
+    height:700px;
+    margin-left:15%;
+    margin-right:15%;
+    padding-top:55px;
+   background-color: #E4E4E4;
+  }
 
 
   /* footor */
@@ -1356,4 +1452,472 @@ align-self:center;
       gap: 25px;
     }
   }
+}
+
+
+
+@media (max-width:766px){
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 40px;
+  align-items: center;
+  color: white;
+  background-color: #0070d2;
+  font-size:7px
+}
+
+.socialcontainer {
+  display: flex;
+  gap: 10px;
+}
+
+.socialmedia {
+  max-width: 10px;
+  max-height: 10px;
+}
+
+
+.logocontainer {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  justify-content:center;
+
+  align-items: center;
+ 
+}
+
+.logo {
+  width: 160px;
+  max-height: 70px;
+  justify-self: center;
+  margin-right:10px;
+}
+
+
+
+/* //appbar */
+
+.appbar {
+  height: 100px;
+  padding-left: 10px;
+  padding-right: 25px;
+
+
+  display: flex;
+  align-items: center;
+  color: #222222;
+  justify-content: space-between;
+}
+.appbarcontainer {
+  height: 55px;
+
+
+  display: flex;
+  color: #333333;
+  gap: 10px;
+  
+}
+
+
+
+.menucontainer{
+  display: none !important;
+}
+
+
+.menuitem {
+  padding-left: 7px;
+  padding-right: 7px;
+  
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  align-self:center;
+  border-style: none !important;
+
+ 
+  
+}
+.menuitem:hover {
+
+  cursor: pointer !important;
+}
+.dropdownitem {
+  padding-left: 7px;
+  padding-right: 7px;
+color:#333333 !important;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: white !important;
+ 
+  border-style: none !important;
+  box-shadow: none !important;
+  
+}
+.dropdownitem:hover {
+  
+  cursor: pointer;
+}
+
+
+.apply {
+ display:none;
+}
+
+.menubar{
+  display:flex !important;
+}
+
+/* slider container */
+
+.slidercontainer {
+ height:150px;
+ height: 55vh;
+  
+}
+.sliderimagecontainer{
+
+}
+.sliderimage {
+  width: 100%;
+  height: 55vh;
+}
+
+/*introduction*/
+
+.introduction {
+  padding-left: 10%;
+  padding-right: 10%;
+  display: flex;
+  gap: 100px;
+padding-bottom: 25px;
+  height:61vhvh;
+  position: relative;
+  background-color:#F2F2F0;
+}
+
+.intro_image {
+  display: none;
+  width: 400px;
+  height: 61vh;
+}
+
+.introduction_text_container_box {
+  flex: 1;
+}
+
+.introduction_heading {
+  font-size: 13px;
+  font-weight: 500;
+  color: #636363;
+  text-transform:uppercase;
+  margin-top:25px;
+  margin-bottom:16px
+}
+.introduction_subheading {
+  font-size: 22px;
+  font-weight: 500;
+  color: #DFC370;
+  text-transform:uppercase
+}
+.introduction_loadmore{
+  background-color:#DFC370 !important ; 
+  border-style: solid;
+  border-width: 2px;
+  border-color: #DFC370 !important ;
+  box-shadow:none !important;
+}
+
+
+.introduction_loadmore:hover{
+  background-color:white !important ; 
+  border-style: solid;
+  border-width: 2px;
+  border-color: #DFC370 !important ;
+  color:#DFC370 ;
+}
+
+
+.introduction_shortdescription {
+  color: #DFC370  !important ;
+  margin-top:10px;
+  margin-bottom:37px;
+  width:80vw;
+  font-size:10 px !important;
+
+
+}
+
+
+/*services*/
+
+.servicesmapper {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.servicescontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+ 
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 40px;
+  padding-bottom: 82px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.servicecontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 100%;
+}
+
+.servicescard {
+  width: 310px;
+  background-color: #f8f8f8;
+}
+
+.serviceheading {
+  font-size: 34px;
+  margin-bottom: 25px;
+  color: white;
+  font-weight: 700;
+}
+
+.jobs_card_available {
+  width:200px
+}
+.jobs_cad_available {
+  height: 100px !important;
+  width:100px !important;
+  border-radius: 70px;
+}
+.jobsheading {
+  font-size: 25px;
+  margin-bottom: 25px;
+  color: black;
+  font-weight: 500;
+}
+.jobavailable_container{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.jobs_categories_bx {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  
+  background-image: url("http://webdesign-finder.com/human-consult/wp-content/uploads/2017/06/texture2.jpg");
+}
+
+.jobs_categories_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  
+}
+
+.jobs_available_crousal{
+  display:none
+}
+
+.mobilejobs{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:25px;
+}
+
+.jobsheading{
+  text-align: center;
+  font-size:40px;
+  font-weight:700;
+}
+
+/* footor */
+.footer_container {
+
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: #242424;
+  
+}
+
+.footor_name {
+  color: white;
+  font-size: 31px;
+  font-family: serif;
+  margin-top: 25px;
+  margin-bottom: 16px;
+}
+
+.footor_address {
+  color: #89909c;
+}
+
+.footor_email {
+  color: white;
+  font-size: 11px;
+  height: 40px;
+  width:350px;
+  background-color: #333333;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navigation_container {
+  color: white;
+
+  padding-top: 25px;
+  font-size: 25px;
+  font-family: serif;
+  max-width: 400px;
+}
+
+.footer_nav {
+  
+}
+
+.footer_navitem {
+  height: 40px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.footer_navitem:hover {
+  background-color: #267adf;
+}
+
+.footertext{
+  font-size:10px
+}
+
+
+.footercontainer{
+
+}
+
+/* image gallery */
+.imagecontainer_gellery {
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 55px;
+  padding-bottom: 55px;
+  justify-content: center;
+  gap: 25px;
+}
+
+.imageitem_gallery {
+  width: 250px;
+}
+
+/* jobs listing */
+.jobcontainer {
+  padding-top: 55px;
+  padding-bottom: 55px;
+  padding-left: 10%;
+  padding-right: 10%;
+  min-height: 400px;
+}
+
+/* Services page */
+.servicespage {
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 55px;
+  padding-bottom: 55px;
+  justify-content: center;
+  gap: 25px;
+}
+
+
+
+
+
+.teamcontainer{
+  margin-top: 40px;
+  
+  margin-left:5%;
+  margin-right:5%;
+  padding-top:55px;
+ background-color: #E4E4E4;
+ padding-bottom:25px;
+}
+
+.teamheding{
+ color: #D66B36;
+ text-align:center;
+ font-size:40px;
+ font-weight:900
+
+}
+.teammapper{
+  margin-top:70px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+ 
+}
+
+.team{
+height:130px !important;
+width:130px !important;
+border-radius: 130px;
+
+}
+.teamcard{
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+  height:400px;
+  background-color:#FEFEFE;
+  width:310px;
+  border-radius:10px;
+  padding-top:25px;
+  box-shadow: 2px 2px #A0A0A0;
+}
+
+.teamname{
+  margin-top:25px;
+  font-size:13px;
+  padding-left:25PX;
+  padding-right:25px;
+}
+
+
 }

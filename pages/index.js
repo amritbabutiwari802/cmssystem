@@ -47,10 +47,10 @@ export default function Home() {
           <Countries_we_serve
             countries_we_serve={data.pagedata.countries_we_serve}
           />
-          <Jobs_available job_categories={data.pagedata.job_categories} />
-          <OurTeam our_team={data.pagedata.our_team} />
+        <Jobs_available job_categories={data.pagedata.job_categories} />
+         <OurTeam our_team={data.pagedata.our_team} />
           <OurClient clients={data.pagedata.clients} />
-          <Footer data={{ global: data.global, menu: data.menu }} />
+          <Footer data={{ global: data.global, menu: data.menu }} /> 
         </>
       )}
     </div>

@@ -27,7 +27,7 @@ const Pages_gjw6 = (props) => {
             registration={data.global.registration}
           />
 
-          <AppBar menu={data.menu} reload={true} />
+          <AppBar menu={data.menu} reload={true} global={data.global}/>
 
           <div>
             {typeof props.data.img == "string" && (

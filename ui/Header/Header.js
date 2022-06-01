@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Dropdown } from "react-bootstrap";
+import { Button, Card, Dropdown, Carousel as RCarousal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./styles.module.css";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Header = (props) => {
   return (
@@ -42,38 +46,16 @@ const Header = (props) => {
 
 export default Header;
 
-const Apbar = dynamic(() => APPBAR, {
-  ssr: false,
-});
-
-function Appbar(props) {
-  const [stickyClass, setStickyClass] = useState('relative');
-
-  useEffect(() => {
-    window.addEventListener('scroll', stickNavbar);
-
-    return () => {
-      window.removeEventListener('scroll', stickNavbar);
-    };
-  }, []);
-
-  const stickNavbar = () => {
-    if (window !== undefined) {
-      let windowHeight = window.scrollY;
-      windowHeight > 500 ? setStickyClass('fixed top-0 left-0 z-50') : setStickyClass('relative');
-    }
-  };
-
-  return <ApPbar {...props} />;
-}
 
 
-const ApPbar = (props) => {
+const Appbar = (props) => {
+  const [mobilemenu,setmobilemenuBar]= useState(false)
   const router = useRouter();
-  return (
+  return (<>
     <div className={styles.appbar}>
       <div className={styles.appbarcontainer}>
       <img src={props.global.img} className={styles.logo} />
+      <div className={`${styles.menucontainer} ${styles.appbarcontainer}`}>
         <div
           className={styles.menuitem}
           onClick={async () => {
@@ -174,10 +156,124 @@ const ApPbar = (props) => {
             );
           }
         })}
+        </div>
       </div>
 
       <div className={styles.apply}>Apply Now</div>
+      <div className={styles.menubar} onClick={()=>{setmobilemenuBar(!mobilemenu)}}> <FontAwesomeIcon
+              className={styles.icon}
+        
+              icon={faBars}
+            /></div>
     </div>
+
+
+
+        <div className={styles.mobilemenucontainer} style={{display:mobilemenu?"flex":"none",
+        flexDirection:"column",alignItems:"center"}} >
+        <div
+          className={styles.menuitem}
+          onClick={async () => {
+            await props.saveData({});
+
+            router.push("/");
+          }}
+        >
+          Home
+        </div>
+        {props.menu.map((value, index) => {
+          if (
+            value.type == "menu" &&
+            !["Gallery", "Services", "Jobs"].includes(value.name)
+          ) {
+            return (
+              <div
+                className={styles.menuitem}
+                onClick={async () => {
+                  await props.saveData(value);
+
+                  router.push("/pages");
+                }}
+              >
+                {value.name}
+              </div>
+            );
+          } else if (
+            value.type == "menu" &&
+            ["Services", "Jobs"].includes(value.name)
+          ) {
+            return (
+              <div
+                className={styles.menuitem}
+                onClick={async () => {
+                  router.push("/" + value.name);
+                }}
+              >
+                {value.name}
+              </div>
+            );
+          } else if (value.type == "menu" && ["Gallery"].includes(value.name)) {
+            return (
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="success"
+                  id="dropdown-basic"
+                  className={styles.dropdownitem}
+                >
+                  {value.name}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={async () => {
+                      router.push("/imagegallery");
+                    }}
+                  >
+                    IMAGES
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={async () => {
+                      router.push("/videogallery");
+                    }}
+                  >
+                    VIDEOS
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            );
+          } else if (value.type == "dropdown") {
+            return (
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="success"
+                  id="dropdown-basic"
+                  className={styles.dropdownitem}
+                >
+                  {value.name}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {value.items.length > 0 &&
+                    value.items.map((item, itemindex) => (
+                      <>
+                        <Dropdown.Item
+                          onClick={async () => {
+                            await props.saveData(item);
+                            router.push("/pages");
+                          }}
+                        >
+                          {item.name}
+                        </Dropdown.Item>
+                      </>
+                    ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            );
+          }
+        })}
+        </div>
+
+</>
   );
 };
 
@@ -255,39 +351,29 @@ const Services = (props) => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    setdata(mapArray(props.services));
+    setdata(props.services);
   }, []);
 
   return (
     <div className={styles.servicescontainer}>
       <div className={styles.serviceheading}> Our Services </div>
-      <Carousel
-        className={styles.servicecontainer}
-        showThumbs={false}
-        axis="horizontal"
-        autoPlay={true}
-        infiniteLoop={true}
-        showIndicators={false}
-      >
-        {data.map((value, index) => (
-          <div className={styles.servicesmapper}>
-            {value.map((lvalue, index) => (
-              <Card className={styles.servicescard}>
-                <Card.Img variant="top" src={lvalue.img} />
-                <Card.Body>
-                  <Card.Text>
-                    <div
+      <div  className={styles.servicesmap} >
+        {data.map((lvalue, index) => (
+          <div className={styles.servicediv}>
+            
+       
+                    <img  src={lvalue.img} className={styles.serviceimg}/>
+                    <div  className={styles.servicetext} 
                       dangerouslySetInnerHTML={{
                         __html: lvalue.shortdescription,
                       }}
                     />
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
+                
+        
           </div>
         ))}
-      </Carousel>
+        
+      </div>
     </div>
   );
 };
@@ -319,23 +405,16 @@ const Jobs_categories = (props) => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    setdata(mapArray(props.jobs_categories));
+    setdata(props.jobs_categories);
   }, []);
   return (
     <div className={styles.jobs_categories_bx}>
       <div className={styles.jobsheading}> Jobs Categories</div>
-      <Carousel
-        className={styles.servicecontainer}
-        showThumbs={false}
-        axis="horizontal"
-        autoPlay={true}
-        infiniteLoop={true}
-        showIndicators={false}
-      >
-        {data.map((value, index) => (
-          <div className={styles.servicesmapper}>
-            {value.map((lvalue, index) => (
-              <Card className={styles.servicescard}>
+      <div className={styles.jobavailable_container}>
+        {data.map((lvalue, index) => (
+      
+   
+              <Card className={styles.jobscard}>
               
                 <Card.Body>
                  <img  src={lvalue.img}
@@ -349,10 +428,10 @@ const Jobs_categories = (props) => {
                  
                 </Card.Body>
               </Card>
-            ))}
-          </div>
+      
+         
         ))}
-      </Carousel>
+      </div>
     </div>
   );
 };
@@ -361,41 +440,29 @@ const Countries_we_serve = (props) => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    setdata(mapArray(props.countries_we_serve));
+    setdata(props.countries_we_serve);
   }, []);
   return (
     <div className={styles.jobs_categories_box}>
       <div className={styles.jobsheading}> Countries We Serve</div>
-      <Carousel
-        className={styles.servicecontainer}
-        showThumbs={false}
-        axis="horizontal"
-        autoPlay={true}
-        infiniteLoop={true}
-        showIndicators={false}
-      >
-        {data.map((value, index) => (
-          <div className={styles.servicesmapper}>
-            {value.map((lvalue, index) => (
-              <Card className={styles.countriesWe}>
-               
-                <Card.Body>
-                  <Card.Text>
+      
+      <RCarousal fade>
+        {data.map((lvalue, index) => (
+ <RCarousal.Item>
+             
                     <img   src={lvalue.img}
-                  className={styles.jobs_cad_available} />
-                    <div
+               />
+                   <RCarousal.Caption>
+                    <div className={styles.countryname}
                       dangerouslySetInnerHTML={{
                         __html: lvalue.shortdescription,
                       }}
                     />
-                  </Card.Text>
-              
-                </Card.Body>
-              </Card>
-            ))}
-          </div>
+                     </RCarousal.Caption>
+                  </RCarousal.Item>
+          
         ))}
-      </Carousel>
+  </RCarousal>
     </div>
   );
 };
@@ -407,10 +474,10 @@ const Jobs_available = (props) => {
     setdata(mapArray(spreadarray(props.job_categories)));
   }, []);
   return (
-    <div className={styles.jobs_categories_box}>
-      <div className={styles.jobsheading}> Job you Can Apply For</div>
+    <div className={styles.jobs_available_box}>
+      <div className={styles.jobsheading}> Jobs Opening</div>
       <Carousel
-        className={styles.servicecontainer}
+        className={styles.jobs_available_crousal}
         showThumbs={false}
         axis="horizontal"
         autoPlay={true}
@@ -441,6 +508,31 @@ const Jobs_available = (props) => {
           </div>
         ))}
       </Carousel>
+
+      {data.map((value, index) => (
+          <div className={styles.mobilejobs}>
+            {value.map((lvalue, index) => (
+              <Card className={styles.servicescard}>
+                <Card.Img
+                  variant="top"
+                  src={lvalue.img}
+                  className={styles.jobs_card_available}
+                />
+                <Card.Body>
+                  <Card.Text>
+                    <div>{lvalue.name}</div>
+                    <div>{lvalue.country}</div>
+                  </Card.Text>
+                  <Button color="white"  className={styles.introduction_loadmore}>
+                    View Jobs
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
+        ))}
+    
+
     </div>
   );
 };
@@ -463,20 +555,20 @@ const OurTeam = (props) => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    setdata(mapArray(props.our_team));
+    setdata(props.our_team);
   }, []);
   return (
     <div className={styles.teamcontainer}>
-      <div className={styles.teamheding}> Our Team</div>
+      <div className={styles.teamheding}>Meet Our Team</div>
+     <div className={styles.teammapper} >
+        {data.map((lvalue, index) => (
+        
      
-        {data.map((value, index) => (
-          <div className={styles.teammapper}>
-            {value.map((lvalue, index) => (
               <div className={styles.teamcard}>
              
                     <img   src={lvalue.img}
                   className={styles.team} />
-                    <div
+                    <div className={styles.teamname}
                       dangerouslySetInnerHTML={{
                         __html: lvalue.shortdescription,
                       }}
@@ -488,10 +580,10 @@ const OurTeam = (props) => {
                     />
                 
               </div>
-            ))}
-          </div>
+      
+       
         ))}
-    
+    </div>
     </div>
   );
 };
@@ -569,7 +661,7 @@ const Footer = (props) => {
         </div>
       </div>
       <div
-        className={styles.logocontainer}
+        className={` ${styles.footercontainer}`}
         style={{ background: "#267adf", color: "white" }}
       >
         <div className={styles.footertext}>
